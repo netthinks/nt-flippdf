@@ -5,7 +5,7 @@ page images, thumbnails, full-text search, download – delivered as static file
 with no TYPO3 involved at runtime. An edition therefore keeps working unchanged,
 whatever happens to the website around it.
 
-Full manual: **[Documentation/Index.md](Documentation/Index.md)** ·
+Manual: **[docs.netthinks.com/nt-flippdf](https://docs.netthinks.com/nt-flippdf/)** ·
 Changes: **[CHANGELOG.md](CHANGELOG.md)**
 
 ![The viewer with an edition open](Documentation/Images/betrachter-doppelseite.webp)
@@ -171,6 +171,9 @@ unverändert weiter, auch wenn sich an der Website etwas ändert.
 
 Ausführliche Anleitung: **[Documentation/Index.md](Documentation/Index.md)** ·
 Änderungen: **[CHANGELOG.md](CHANGELOG.md)**
+
+Handbuch: **[docs.netthinks.com/nt-flippdf](https://docs.netthinks.com/nt-flippdf/)** ·
+Änderungen: **[CHANGELOG.de.md](CHANGELOG.de.md)**
 
 ## Voraussetzungen
 

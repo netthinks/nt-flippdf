@@ -6,3 +6,7 @@
 /Build           export-ignore
 /Tests           export-ignore
 /Intern          export-ignore
+/docs            export-ignore
+/mkdocs.yml      export-ignore
+/requirements.txt export-ignore
+/site            export-ignore
