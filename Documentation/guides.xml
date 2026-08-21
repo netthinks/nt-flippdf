@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guides xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://www.phpdoc.org/projects/guides/latest/guides.xsd"
+        links-are-relative="true">
+    <project title="Page-flip editions from PDF files"
+             version="1.8"
+             release="1.8.0"
+             copyright="since 2026 by NET.THINKS"/>
+    <extension class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+               project-home="https://github.com/netthinks/nt-flippdf"
+               project-repository="https://github.com/netthinks/nt-flippdf"
+               project-issues="https://github.com/netthinks/nt-flippdf/issues"
+               edit-on-github="netthinks/nt-flippdf"
+               edit-on-github-branch="main"
+               typo3-core-preferred="stable"/>
+    <inventory id="t3coreapi" url="https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/"/>
+</guides>

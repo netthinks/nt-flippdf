@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="nt_flippdf">
+    <rect width="64" height="64" rx="10" fill="#1f2933"/>
+    <!-- Aufgeschlagenes Buch: linke Seite ruhig, rechte Seite beim Umblaettern -->
+    <path fill="#f4f5f7" d="M10 16h20v34H14a4 4 0 0 1-4-4V16Z"/>
+    <path fill="#d9dde3" d="M34 16h16a4 4 0 0 1 4 4v26a4 4 0 0 1-4 4H34V16Z"/>
+    <path fill="#ec6602" d="M34 16h9l-9 34h-1.5l6-17-6-17h1.5Z" opacity=".9"/>
+    <path fill="#8b95a1" d="M31 14h2v38h-2z"/>
+    <!-- Zeilen als Andeutung von Text -->
+    <g fill="#b9c0c9">
+        <rect x="14" y="22" width="13" height="2" rx="1"/>
+        <rect x="14" y="27" width="13" height="2" rx="1"/>
+        <rect x="14" y="32" width="9" height="2" rx="1"/>
+        <rect x="43" y="22" width="8" height="2" rx="1"/>
+        <rect x="43" y="27" width="8" height="2" rx="1"/>
+    </g>
+</svg>

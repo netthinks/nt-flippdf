@@ -1,0 +1,39 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Netthinks\NtFlippdf\:
+    resource: '../Classes/*'
+
+  # Der Datenprozessor wird ueber seinen Klassennamen aus dem TypoScript
+  # geholt. Ohne public kaeme er ohne seine Abhaengigkeiten an.
+  Netthinks\NtFlippdf\DataProcessing\IssueProcessor:
+    public: true
+
+  # Aus dem TCA wird die Klasse ueber ihren Namen geholt. Ohne public kaeme
+  # sie ohne ihre Abhaengigkeiten an - im Backend endet das beim Oeffnen des
+  # Inhaltselements mit einem Fehler.
+  Netthinks\NtFlippdf\Backend\IssueItems:
+    public: true
+
+  # Dasselbe gilt fuer die Vorschau im Seitenmodul: TYPO3 liest den Klassennamen
+  # aus dem TCA und holt die Klasse ueber makeInstance.
+  Netthinks\NtFlippdf\Backend\ViewerPreview:
+    public: true
+
+  Netthinks\NtFlippdf\Command\BuildCommand:
+    tags:
+      - name: console.command
+        command: 'flippdf:build'
+        description: 'Baut aus einem PDF eine blätterbare Fassung.'
+        schedulable: false
+
+  Netthinks\NtFlippdf\Command\RefreshCommand:
+    tags:
+      - name: console.command
+        command: 'flippdf:refresh'
+        description: 'Erneuert den Betrachter vorhandener Ausgaben.'
+        schedulable: false
+

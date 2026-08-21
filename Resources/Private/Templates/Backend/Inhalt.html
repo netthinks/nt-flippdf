@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+
+<f:section name="Content">
+
+    <h1>{f:translate(key: 'LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:toc.heading', arguments: {0: buch.title})}</h1>
+    <p class="text-muted">{buch.pageCount} <f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.meta.pages" /> &middot; <f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.meta.slug" /> <code>{kennung}</code></p>
+
+    <form method="post" action="{modulUri}">
+        <input type="hidden" name="aktion" value="inhaltSpeichern" />
+        <input type="hidden" name="kennung" value="{kennung}" />
+
+        <div class="form-group">
+            <label class="form-label" for="verzeichnis"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:toc.entries" /></label>
+            <textarea class="form-control" id="verzeichnis" name="verzeichnis" rows="16"
+                      spellcheck="false">{verzeichnis}</textarea>
+            <p class="form-text"><f:format.raw><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:toc.help" /></f:format.raw></p>
+        </div>
+
+        <button class="btn btn-primary" type="submit"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:action.save" /></button>
+        <a class="btn btn-default" href="{modulUri}"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:action.back" /></a>
+    </form>
+
+</f:section>
+</html>

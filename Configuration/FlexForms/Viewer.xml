@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>Blätterbare Ausgabe</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.kennung>
+                        <label>Ausgabe</label>
+                        <description>Die gebauten Ausgaben stehen im Modul „Blätterbare Ausgaben“ unter Datei.</description>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <itemsProcFunc>Netthinks\NtFlippdf\Backend\IssueItems->populate</itemsProcFunc>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">– bitte wählen –</numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.kennung>
+                    <settings.darstellung>
+                        <label>Darstellung</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Eingebettet auf der Seite</numIndex>
+                                    <numIndex index="1">eingebettet</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Nur eine Schaltfläche, öffnet in neuem Fenster</numIndex>
+                                    <numIndex index="1">knopf</numIndex>
+                                </numIndex>
+                            </items>
+                            <default>eingebettet</default>
+                        </config>
+                    </settings.darstellung>
+                    <settings.hoehe>
+                        <label>Höhe des eingebetteten Betrachters in Pixeln</label>
+                        <config>
+                            <type>number</type>
+                            <default>700</default>
+                            <range>
+                                <lower>300</lower>
+                                <upper>2000</upper>
+                            </range>
+                        </config>
+                    </settings.hoehe>
+                    <settings.knopftext>
+                        <label>Beschriftung der Schaltfläche</label>
+                        <config>
+                            <type>input</type>
+                            <default>Whitepaper durchblättern</default>
+                        </config>
+                    </settings.knopftext>
+                    <settings.teaser>
+                        <label>Nur eine Vorschau zeigen</label>
+                        <description>Zeigt nur die ersten Seiten und bietet keinen Download an. Die übrigen Seiten sind dann auch nicht über die Adresse erreichbar.</description>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </settings.teaser>
+                    <settings.teaserseiten>
+                        <label>Seiten in der Vorschau</label>
+                        <description>Höchstens so viele, wie beim Bauen der Ausgabe festgelegt wurden.</description>
+                        <config>
+                            <type>number</type>
+                            <default>5</default>
+                            <range>
+                                <lower>1</lower>
+                                <upper>50</upper>
+                            </range>
+                        </config>
+                        <displayCond>FIELD:settings.teaser:REQ:true</displayCond>
+                    </settings.teaserseiten>
+                    <settings.hintergrund>
+                        <label>Hintergrund hinter dem Buch</label>
+                        <description>Gilt nur für dieses Element. „Wie in der Ausgabe“ übernimmt, was im Modul „Blätterbare Ausgaben“ eingestellt ist.</description>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Wie in der Ausgabe eingestellt</numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Keiner</numIndex>
+                                    <numIndex index="1">-</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">Bücherregal</numIndex>
+                                    <numIndex index="1">buecherregal</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">Schreibtisch</numIndex>
+                                    <numIndex index="1">schreibtisch</numIndex>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <numIndex index="0">Frühling</numIndex>
+                                    <numIndex index="1">fruehling</numIndex>
+                                </numIndex>
+                                <numIndex index="5">
+                                    <numIndex index="0">Herbst</numIndex>
+                                    <numIndex index="1">herbst</numIndex>
+                                </numIndex>
+                                <numIndex index="6">
+                                    <numIndex index="0">Winter</numIndex>
+                                    <numIndex index="1">winter</numIndex>
+                                </numIndex>
+                                <numIndex index="7">
+                                    <numIndex index="0">Industrie</numIndex>
+                                    <numIndex index="1">industrie</numIndex>
+                                </numIndex>
+                                <numIndex index="8">
+                                    <numIndex index="0">Neutral (dunkel)</numIndex>
+                                    <numIndex index="1">neutral</numIndex>
+                                </numIndex>
+                            </items>
+                            <default></default>
+                        </config>
+                    </settings.hintergrund>
+                    <settings.hgabdunklung>
+                        <label>Abdunklung des Hintergrunds in Prozent</label>
+                        <description>Leer lassen heißt: wie in der Ausgabe. 0 bis 90.</description>
+                        <config>
+                            <type>input</type>
+                            <size>6</size>
+                            <eval>trim,int</eval>
+                            <default></default>
+                        </config>
+                        <displayCond>FIELD:settings.hintergrund:!=:-</displayCond>
+                    </settings.hgabdunklung>
+                    <settings.hgpassung>
+                        <label>Einpassung des Hintergrunds</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Wie in der Ausgabe eingestellt</numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">füllend</numIndex>
+                                    <numIndex index="1">cover</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">ganz sichtbar</numIndex>
+                                    <numIndex index="1">contain</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">gekachelt</numIndex>
+                                    <numIndex index="1">tile</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
+                        <displayCond>FIELD:settings.hintergrund:!=:-</displayCond>
+                    </settings.hgpassung>
+                    <settings.stil>
+                        <label>Beschriftung der Schaltflächen</label>
+                        <description>Gilt nur für dieses Element. „Wie in der Ausgabe“ übernimmt, was im Modul „Blätterbare Ausgaben“ eingestellt ist.</description>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Wie in der Ausgabe eingestellt</numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Ausgeschrieben</numIndex>
+                                    <numIndex index="1">text</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">Nur Symbole</numIndex>
+                                    <numIndex index="1">icon</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">Symbol und Beschriftung</numIndex>
+                                    <numIndex index="1">both</numIndex>
+                                </numIndex>
+                            </items>
+                            <default></default>
+                        </config>
+                    </settings.stil>
+                    <settings.ohne>
+                        <label>Hier ausblenden</label>
+                        <description>Was angehakt ist, zeigt der Betrachter an dieser Stelle nicht. Die Ausgabe selbst bleibt unverändert.</description>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectCheckBox</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Suche</numIndex>
+                                    <numIndex index="1">search</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Inhaltsverzeichnis</numIndex>
+                                    <numIndex index="1">toc</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">Seitenübersicht</numIndex>
+                                    <numIndex index="1">thumbs</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">Download</numIndex>
+                                    <numIndex index="1">download</numIndex>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <numIndex index="0">Vergrößern</numIndex>
+                                    <numIndex index="1">zoom</numIndex>
+                                </numIndex>
+                                <numIndex index="5">
+                                    <numIndex index="0">Drucken</numIndex>
+                                    <numIndex index="1">print</numIndex>
+                                </numIndex>
+                                <numIndex index="6">
+                                    <numIndex index="0">Vollbild</numIndex>
+                                    <numIndex index="1">fullscreen</numIndex>
+                                </numIndex>
+                                <numIndex index="7">
+                                    <numIndex index="0">Sprachumschaltung</numIndex>
+                                    <numIndex index="1">languages</numIndex>
+                                </numIndex>
+                                <numIndex index="13">
+                                    <numIndex index="0">In eigenem Fenster öffnen</numIndex>
+                                    <numIndex index="1">extern</numIndex>
+                                </numIndex>
+                                <numIndex index="14">
+                                    <numIndex index="0">Blättergeräusch</numIndex>
+                                    <numIndex index="1">sound</numIndex>
+                                </numIndex>
+                                <numIndex index="15">
+                                    <numIndex index="0">Logo</numIndex>
+                                    <numIndex index="1">logo</numIndex>
+                                </numIndex>
+                                <numIndex index="8">
+                                    <numIndex index="0">Pfeile neben dem Buch</numIndex>
+                                    <numIndex index="1">nav</numIndex>
+                                </numIndex>
+                                <numIndex index="9">
+                                    <numIndex index="0">Seitenregler</numIndex>
+                                    <numIndex index="1">slider</numIndex>
+                                </numIndex>
+                                <numIndex index="10">
+                                    <numIndex index="0">Kapitelmarken</numIndex>
+                                    <numIndex index="1">marks</numIndex>
+                                </numIndex>
+                                <numIndex index="11">
+                                    <numIndex index="0">Seitenzahl</numIndex>
+                                    <numIndex index="1">indicator</numIndex>
+                                </numIndex>
+                                <numIndex index="12">
+                                    <numIndex index="0">Bedienhinweis</numIndex>
+                                    <numIndex index="1">hint</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.ohne>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

@@ -1,0 +1,14 @@
+plugin.tx_ntflippdf {
+    # Unter welcher Adresse die gebauten Ausgaben liegen. Muss zur
+    # Einstellung "baseUrl" der Extension passen.
+    basisAdresse = /blaetterbar/
+    # Eigene Vorlagen können hier eingehängt werden.
+    templateRootPath =
+
+    # Klassen um das Inhaltselement herum. Ohne Angabe steht der Betrachter
+    # über die volle Breite - in den meisten Auftritten begrenzt erst ein
+    # Container den Inhaltsbereich, und dessen Klasse kennt nur das Projekt.
+    # Beispiel: innenKlasse = container-large container-fluid clearfix
+    rahmenKlasse = ntflippdf-wrap
+    innenKlasse =
+}

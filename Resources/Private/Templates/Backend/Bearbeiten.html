@@ -1,0 +1,235 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+
+<f:section name="Content">
+
+    <h1><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.heading.simple" /></h1>
+    <p class="text-muted">
+        <f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.meta.slug" /> <code>{kennung}</code> &middot; {buch.pageCount} <f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.meta.pages" /> &middot;
+        <f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.meta.builtfrom" /> <code>{quelle}</code>
+    </p>
+    <div class="callout callout-info">
+        <p><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.note" /></p>
+    </div>
+
+    <form method="post" action="{modulUri}">
+        <input type="hidden" name="aktion" value="speichern" />
+        <input type="hidden" name="kennung" value="{kennung}" />
+
+        <div class="row">
+            <div class="col-md-8 form-group">
+                <label class="form-label" for="titel"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:build.title" /></label>
+                <input class="form-control" type="text" id="titel" name="titel" value="{buch.title}" />
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.title.text" /></p>
+            </div>
+            <div class="col-md-4 form-group">
+                <label class="form-label" for="sprache"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:list.language" /></label>
+                <select class="form-select" id="sprache" name="sprache">
+                    <option value="de" <f:if condition="{buch.language} == 'de'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:language.de" /></option>
+                    <option value="en" <f:if condition="{buch.language} == 'en'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:language.en" /></option>
+                    <option value="fr" <f:if condition="{buch.language} == 'fr'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:language.fr" /></option>
+                    <option value="zh" <f:if condition="{buch.language} == 'zh'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:language.zh" /></option>
+                </select>
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.language.text" /></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label class="form-label" for="farbeLeiste"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.bar.label" /></label>
+                <div class="input-group">
+                    <input type="color" class="form-control form-control-color farbwahl" data-fuer="farbeLeiste"
+                           value="{f:if(condition: theme.bar, then: theme.bar, else: '#1f2933')}"
+                           title="{f:translate(key: 'LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.pick')}" style="max-width:3rem" />
+                    <input class="form-control" type="text" id="farbeLeiste" name="farbeLeiste" list="farbvorschlaege"
+                           value="{theme.bar}" placeholder="#1f2933" />
+                </div>
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.bar.text" /></p>
+            </div>
+            <div class="col-md-4 form-group">
+                <label class="form-label" for="farbeAkzent"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.accent.label" /></label>
+                <div class="input-group">
+                    <input type="color" class="form-control form-control-color farbwahl" data-fuer="farbeAkzent"
+                           value="{f:if(condition: theme.accent, then: theme.accent, else: '#ec6602')}"
+                           title="{f:translate(key: 'LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.pick')}" style="max-width:3rem" />
+                    <input class="form-control" type="text" id="farbeAkzent" name="farbeAkzent" list="farbvorschlaege"
+                           value="{theme.accent}" placeholder="#ec6602" />
+                </div>
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.colour.accent.text" /></p>
+            </div>
+            <div class="col-md-4 form-group">
+                <label class="form-label" for="vorschau"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.teaser.label" /></label>
+                <input class="form-control" type="number" id="vorschau" name="vorschau"
+                       value="{vorschau}" min="0" max="{buch.pageCount}" />
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.teaser.text0" /></p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="download" name="download" value="1"
+                       <f:if condition="buch.downloadUrl"> checked="checked"</f:if> />
+                <label class="form-check-label" for="download"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.download.label" /></label>
+            </div>
+            <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.download.text" /></p>
+        </div>
+
+        <f:for each="{zusatzfelder}" as="abschnitt"><f:format.raw>{abschnitt}</f:format.raw></f:for>
+
+        <h2 class="h4"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.controls.heading" /></h2>
+        <p class="text-muted"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.controls.note" /></p>
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label class="form-label" for="knopfstil"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.buttonstyle" /></label>
+                <select class="form-select" id="knopfstil" name="ui[buttonStyle]">
+                    <option value="text" <f:if condition="{bedienung.buttonStyle} == 'text'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.buttonstyle.text" /></option>
+                    <option value="icon" <f:if condition="{bedienung.buttonStyle} == 'icon'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.buttonstyle.icon" /></option>
+                    <option value="both" <f:if condition="{bedienung.buttonStyle} == 'both'"> selected="selected"</f:if>><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.buttonstyle.both" /></option>
+                </select>
+                <p class="form-text"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:edit.buttonstyle.note" /></p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-search" name="ui[search]" value="1"
+                               <f:if condition="{bedienung.search} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-search"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.search" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-toc" name="ui[toc]" value="1"
+                               <f:if condition="{bedienung.toc} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-toc"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.toc" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-thumbs" name="ui[thumbs]" value="1"
+                               <f:if condition="{bedienung.thumbs} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-thumbs"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.thumbs" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-download" name="ui[download]" value="1"
+                               <f:if condition="{bedienung.download} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-download"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.download" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-zoom" name="ui[zoom]" value="1"
+                               <f:if condition="{bedienung.zoom} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-zoom"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.zoom" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-print" name="ui[print]" value="1"
+                               <f:if condition="{bedienung.print} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-print"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.print" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-fullscreen" name="ui[fullscreen]" value="1"
+                               <f:if condition="{bedienung.fullscreen} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-fullscreen"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.fullscreen" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-logo" name="ui[logo]" value="1"
+                               <f:if condition="{bedienung.logo} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-logo"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.logo" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-extern" name="ui[extern]" value="1"
+                               <f:if condition="{bedienung.extern} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-extern"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.extern" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-sound" name="ui[sound]" value="1"
+                               <f:if condition="{bedienung.sound} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-sound"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.sound" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-soundOn" name="ui[soundOn]" value="1"
+                               <f:if condition="{bedienung.soundOn} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-soundOn"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.soundOn" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-languages" name="ui[languages]" value="1"
+                               <f:if condition="{bedienung.languages} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-languages"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.languages" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-nav" name="ui[nav]" value="1"
+                               <f:if condition="{bedienung.nav} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-nav"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.nav" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-slider" name="ui[slider]" value="1"
+                               <f:if condition="{bedienung.slider} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-slider"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.slider" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-marks" name="ui[marks]" value="1"
+                               <f:if condition="{bedienung.marks} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-marks"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.marks" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-indicator" name="ui[indicator]" value="1"
+                               <f:if condition="{bedienung.indicator} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-indicator"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.indicator" /></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ui-hint" name="ui[hint]" value="1"
+                               <f:if condition="{bedienung.hint} != 0"> checked="checked"</f:if> />
+                        <label class="form-check-label" for="ui-hint"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:ui.hint" /></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:action.save" /></button>
+        <a class="btn btn-default" href="{modulUri}"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:action.back" /></a>
+    </form>
+
+    <datalist id="farbvorschlaege">
+        <option value="#ec6602"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.orange" /></option>
+        <option value="#2b2b2b"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.darkgrey" /></option>
+        <option value="#1f2933"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.anthracite" /></option>
+        <option value="#55606a"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.bluegrey" /></option>
+        <option value="#7aa2c2"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.lightblue" /></option>
+        <option value="#ffffff"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.white" /></option>
+        <option value="#000000"><f:translate key="LLL:EXT:nt_flippdf/Resources/Private/Language/locallang.xlf:colour.black" /></option>
+    </datalist>
+
+    <script src="{f:uri.resource(path: 'Backend/farbwahl.js', extensionName: 'NtFlippdf')}" defer="defer"></script>
+
+</f:section>
+</html>

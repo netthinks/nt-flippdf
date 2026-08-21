@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-08-21T00:00:00Z" product-name="nt_flippdf">
+        <header/>
+        <body>
+            <trans-unit id="module.heading" resname="module.heading">
+                <source>Page-flip editions</source>
+                <target>Blätterbare Ausgaben</target>
+            </trans-unit>
+            <trans-unit id="env.missing.heading" resname="env.missing.heading">
+                <source>Tools are missing on this server</source>
+                <target>Es fehlen Werkzeuge auf diesem Server</target>
+            </trans-unit>
+            <trans-unit id="env.missing.text" resname="env.missing.text">
+                <source>Without these programs no edition can be built:</source>
+                <target>Ohne diese Programme lässt sich keine Ausgabe bauen:</target>
+            </trans-unit>
+            <trans-unit id="list.empty" resname="list.empty">
+                <source>There is no edition yet. The first one can be built from a PDF file below.</source>
+                <target>Es gibt noch keine Ausgabe. Unten lässt sich die erste aus einer PDF-Datei bauen.</target>
+            </trans-unit>
+            <trans-unit id="list.slug" resname="list.slug">
+                <source>Slug</source>
+                <target>Kennung</target>
+            </trans-unit>
+            <trans-unit id="list.title" resname="list.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="list.language" resname="list.language">
+                <source>Language</source>
+                <target>Sprache</target>
+            </trans-unit>
+            <trans-unit id="list.pages" resname="list.pages">
+                <source>Pages</source>
+                <target>Seiten</target>
+            </trans-unit>
+            <trans-unit id="list.toc" resname="list.toc">
+                <source>Contents</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="list.size" resname="list.size">
+                <source>Size</source>
+                <target>Größe</target>
+            </trans-unit>
+            <trans-unit id="list.built" resname="list.built">
+                <source>Built</source>
+                <target>Gebaut</target>
+            </trans-unit>
+            <trans-unit id="list.toc.none" resname="list.toc.none">
+                <source>none</source>
+                <target>keins</target>
+            </trans-unit>
+            <trans-unit id="list.outdated" resname="list.outdated">
+                <source>outdated</source>
+                <target>veraltet</target>
+            </trans-unit>
+            <trans-unit id="list.outdated.title" resname="list.outdated.title">
+                <source>The source file is newer than the built edition</source>
+                <target>Die Quelldatei ist neuer als die gebaute Ausgabe</target>
+            </trans-unit>
+            <trans-unit id="list.preview.badge" resname="list.preview.badge">
+                <source>Preview</source>
+                <target>Vorschau</target>
+            </trans-unit>
+            <trans-unit id="list.preview.of" resname="list.preview.of">
+                <source>of</source>
+                <target>zu</target>
+            </trans-unit>
+            <trans-unit id="list.preview.has" resname="list.preview.has">
+                <source>Preview:</source>
+                <target>Vorschau:</target>
+            </trans-unit>
+            <trans-unit id="list.preview.title" resname="list.preview.title">
+                <source>Preview of the edition %s</source>
+                <target>Vorschau der Ausgabe %s</target>
+            </trans-unit>
+            <trans-unit id="action.view" resname="action.view">
+                <source>View</source>
+                <target>Ansehen</target>
+            </trans-unit>
+            <trans-unit id="action.edit" resname="action.edit">
+                <source>Edit</source>
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="action.toc" resname="action.toc">
+                <source>Contents</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="action.refresh" resname="action.refresh">
+                <source>Refresh</source>
+                <target>Erneuern</target>
+            </trans-unit>
+            <trans-unit id="action.refresh.title" resname="action.refresh.title">
+                <source>Refresh the viewer without rendering the pages again</source>
+                <target>Betrachter erneuern, ohne die Seiten neu zu rendern</target>
+            </trans-unit>
+            <trans-unit id="action.rebuild" resname="action.rebuild">
+                <source>Rebuild</source>
+                <target>Neu bauen</target>
+            </trans-unit>
+            <trans-unit id="action.rebuild.title" resname="action.rebuild.title">
+                <source>Build again from the same source file</source>
+                <target>Aus derselben Quelldatei noch einmal bauen</target>
+            </trans-unit>
+            <trans-unit id="action.rebuild.gone" resname="action.rebuild.gone">
+                <source>Rebuilding is not possible: the source file %s is gone</source>
+                <target>Neu bauen geht nicht: die Quelldatei %s ist nicht mehr da</target>
+            </trans-unit>
+            <trans-unit id="action.rebuild.preview" resname="action.rebuild.preview">
+                <source>This preview is written when %s is built and renewed with it</source>
+                <target>Diese Vorschau entsteht beim Bauen von %s und wird dort mit erneuert</target>
+            </trans-unit>
+            <trans-unit id="action.delete" resname="action.delete">
+                <source>Delete</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="action.delete.confirm" resname="action.delete.confirm">
+                <source>Really delete the edition %s?</source>
+                <target>Ausgabe %s wirklich löschen?</target>
+            </trans-unit>
+            <trans-unit id="action.save" resname="action.save">
+                <source>Save</source>
+                <target>Speichern</target>
+            </trans-unit>
+            <trans-unit id="action.back" resname="action.back">
+                <source>Back</source>
+                <target>Zurück</target>
+            </trans-unit>
+            <trans-unit id="build.heading" resname="build.heading">
+                <source>Build a new edition</source>
+                <target>Neue Ausgabe bauen</target>
+            </trans-unit>
+            <trans-unit id="build.file" resname="build.file">
+                <source>PDF file</source>
+                <target>PDF-Datei</target>
+            </trans-unit>
+            <trans-unit id="build.file.choose" resname="build.file.choose">
+                <source>– please choose –</source>
+                <target>– bitte wählen –</target>
+            </trans-unit>
+            <trans-unit id="build.file.text" resname="build.file.text">
+                <source>The PDF files uploaded most recently are offered. Which folders are taken into account is set in the extension configuration under</source>
+                <target>Angeboten werden die zuletzt hochgeladenen PDF-Dateien. Welche Ordner dabei berücksichtigt werden, steht in den Erweiterungseinstellungen unter</target>
+            </trans-unit>
+            <trans-unit id="build.slug" resname="build.slug">
+                <source>Slug</source>
+                <target>Kennung</target>
+            </trans-unit>
+            <trans-unit id="build.slug.text" resname="build.slug.text">
+                <source>Letters, digits, hyphen and underscore only. It is also the directory name.</source>
+                <target>Nur Buchstaben, Ziffern, Binde- und Unterstrich. Zugleich der Verzeichnisname.</target>
+            </trans-unit>
+            <trans-unit id="build.language.text" resname="build.language.text">
+                <source>Sets the labels in the viewer – search, contents, full screen and so on.</source>
+                <target>Bestimmt die Beschriftungen im Betrachter – Suche, Inhalt, Vollbild und so weiter.</target>
+            </trans-unit>
+            <trans-unit id="build.title" resname="build.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="build.title.placeholder" resname="build.title.placeholder">
+                <source>Shown above the viewer</source>
+                <target>Steht über dem Betrachter</target>
+            </trans-unit>
+            <trans-unit id="build.download" resname="build.download">
+                <source>Build a smaller version for download</source>
+                <target>Verkleinerte Fassung zum Herunterladen mitbauen</target>
+            </trans-unit>
+            <trans-unit id="build.submit" resname="build.submit">
+                <source>Build edition</source>
+                <target>Ausgabe bauen</target>
+            </trans-unit>
+            <trans-unit id="build.duration" resname="build.duration">
+                <source>Rendering takes from half a minute to several minutes, depending on the extent. Please leave the window open.</source>
+                <target>Das Rendern dauert je nach Umfang eine halbe bis mehrere Minuten. Das Fenster bitte offen lassen.</target>
+            </trans-unit>
+            <trans-unit id="build.progress.start" resname="build.progress.start">
+                <source>The build is starting …</source>
+                <target>Der Bau beginnt …</target>
+            </trans-unit>
+            <trans-unit id="language.de" resname="language.de">
+                <source>German</source>
+                <target>Deutsch</target>
+            </trans-unit>
+            <trans-unit id="language.en" resname="language.en">
+                <source>English</source>
+                <target>Englisch</target>
+            </trans-unit>
+            <trans-unit id="language.fr" resname="language.fr">
+                <source>French</source>
+                <target>Französisch</target>
+            </trans-unit>
+            <trans-unit id="language.zh" resname="language.zh">
+                <source>Chinese</source>
+                <target>Chinesisch</target>
+            </trans-unit>
+            <trans-unit id="footer.storage" resname="footer.storage">
+                <source>Storage:</source>
+                <target>Ablage:</target>
+            </trans-unit>
+            <trans-unit id="footer.address" resname="footer.address">
+                <source>Address:</source>
+                <target>Adresse:</target>
+            </trans-unit>
+            <trans-unit id="edit.heading" resname="edit.heading">
+                <source>Edit edition: %s</source>
+                <target>Ausgabe bearbeiten: %s</target>
+            </trans-unit>
+            <trans-unit id="edit.source" resname="edit.source">
+                <source>Source file</source>
+                <target>Quelldatei</target>
+            </trans-unit>
+            <trans-unit id="edit.colours" resname="edit.colours">
+                <source>Colours</source>
+                <target>Farben</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar" resname="edit.colour.bar">
+                <source>Bars</source>
+                <target>Leisten</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent" resname="edit.colour.accent">
+                <source>Accent</source>
+                <target>Akzent</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.text" resname="edit.colour.text">
+                <source>Empty means: the default from the extension configuration.</source>
+                <target>Leer heißt: die Vorgabe aus der Erweiterungskonfiguration.</target>
+            </trans-unit>
+            <trans-unit id="edit.teaser" resname="edit.teaser">
+                <source>Pages in the content element preview</source>
+                <target>Seiten in der Vorschau des Inhaltselements</target>
+            </trans-unit>
+            <trans-unit id="edit.teaser.text" resname="edit.teaser.text">
+                <source>0 switches the preview off. It only takes effect where the content element is set to preview.</source>
+                <target>0 schaltet die Vorschau ab. Sie wirkt nur dort, wo das Inhaltselement auf Vorschau steht.</target>
+            </trans-unit>
+            <trans-unit id="edit.download" resname="edit.download">
+                <source>Offer the download in the viewer</source>
+                <target>Download im Betrachter anbieten</target>
+            </trans-unit>
+            <trans-unit id="edit.download.text" resname="edit.download.text">
+                <source>Only sets the link in the viewer. The stored file stays where it is.</source>
+                <target>Setzt nur den Verweis im Betrachter. Die abgelegte Datei bleibt liegen.</target>
+            </trans-unit>
+            <trans-unit id="edit.controls" resname="edit.controls">
+                <source>Controls of the viewer</source>
+                <target>Bedienung des Betrachters</target>
+            </trans-unit>
+            <trans-unit id="edit.controls.text" resname="edit.controls.text">
+                <source>What is switched off here is removed from the viewer, not only hidden.</source>
+                <target>Was hier abgeschaltet ist, wird aus dem Betrachter entfernt, nicht nur versteckt.</target>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle" resname="edit.buttonstyle">
+                <source>Labels of the buttons</source>
+                <target>Beschriftung der Schaltflächen</target>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.text" resname="edit.buttonstyle.text">
+                <source>Text</source>
+                <target>ausgeschrieben</target>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.icon" resname="edit.buttonstyle.icon">
+                <source>Icons only</source>
+                <target>nur Symbole</target>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.both" resname="edit.buttonstyle.both">
+                <source>Icon and label</source>
+                <target>Symbol und Beschriftung</target>
+            </trans-unit>
+            <trans-unit id="toc.heading" resname="toc.heading">
+                <source>Table of contents: %s</source>
+                <target>Inhaltsverzeichnis: %s</target>
+            </trans-unit>
+            <trans-unit id="toc.text" resname="toc.text">
+                <source>One line per chapter: page number, tab, title. Empty lines are ignored.</source>
+                <target>Eine Zeile je Kapitel: Seitenzahl, Tabulator, Titel. Leere Zeilen werden übergangen.</target>
+            </trans-unit>
+            <trans-unit id="msg.build.missing" resname="msg.build.missing">
+                <source>Please choose a PDF file and give a slug.</source>
+                <target>Bitte eine PDF-Datei und eine Kennung angeben.</target>
+            </trans-unit>
+            <trans-unit id="msg.build.ok" resname="msg.build.ok">
+                <source>Edition "%s" built: %d pages, %s MB.</source>
+                <target>Ausgabe "%s" gebaut: %d Seiten, %s MB.</target>
+            </trans-unit>
+            <trans-unit id="msg.build.preview" resname="msg.build.preview">
+                <source> Preview "%s" with %d pages, without download.</source>
+                <target> Vorschau "%s" mit %d Seiten, ohne Download.</target>
+            </trans-unit>
+            <trans-unit id="msg.build.failed" resname="msg.build.failed">
+                <source>The edition could not be built: %s</source>
+                <target>Die Ausgabe konnte nicht gebaut werden: %s</target>
+            </trans-unit>
+            <trans-unit id="msg.refresh.ok" resname="msg.refresh.ok">
+                <source>Viewer of "%s" refreshed.</source>
+                <target>Betrachter von "%s" erneuert.</target>
+            </trans-unit>
+            <trans-unit id="msg.unknown" resname="msg.unknown">
+                <source>There is no edition "%s".</source>
+                <target>Die Ausgabe "%s" gibt es nicht.</target>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.nosource" resname="msg.rebuild.nosource">
+                <source>No source file is stored for "%s".</source>
+                <target>Für "%s" ist keine Quelldatei hinterlegt.</target>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.ok" resname="msg.rebuild.ok">
+                <source>%s: built again, %d pages.</source>
+                <target>%s: neu gebaut, %d Seiten.</target>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.preview" resname="msg.rebuild.preview">
+                <source> Preview "%s" as well.</source>
+                <target> Vorschau "%s" ebenfalls.</target>
+            </trans-unit>
+            <trans-unit id="msg.delete.ok" resname="msg.delete.ok">
+                <source>Edition "%s" deleted.</source>
+                <target>Ausgabe "%s" gelöscht.</target>
+            </trans-unit>
+            <trans-unit id="msg.delete.failed" resname="msg.delete.failed">
+                <source>The edition "%s" could not be deleted.</source>
+                <target>Die Ausgabe "%s" konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="msg.save.ok" resname="msg.save.ok">
+                <source>Settings for "%s" saved.</source>
+                <target>Angaben zu "%s" gespeichert.</target>
+            </trans-unit>
+            <trans-unit id="msg.save.failed" resname="msg.save.failed">
+                <source>The settings could not be saved.</source>
+                <target>Die Angaben konnten nicht gespeichert werden.</target>
+            </trans-unit>
+            <trans-unit id="msg.toc.ok" resname="msg.toc.ok">
+                <source>Table of contents of "%s" saved: %d chapters.</source>
+                <target>Inhaltsverzeichnis von "%s" gespeichert: %d Kapitel.</target>
+            </trans-unit>
+            <trans-unit id="edit.heading.simple" resname="edit.heading.simple">
+                <source>Edit edition</source>
+                <target>Ausgabe bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="edit.meta.slug" resname="edit.meta.slug">
+                <source>Slug</source>
+                <target>Kennung</target>
+            </trans-unit>
+            <trans-unit id="edit.meta.pages" resname="edit.meta.pages">
+                <source>pages</source>
+                <target>Seiten</target>
+            </trans-unit>
+            <trans-unit id="edit.meta.builtfrom" resname="edit.meta.builtfrom">
+                <source>built from</source>
+                <target>gebaut aus</target>
+            </trans-unit>
+            <trans-unit id="edit.note" resname="edit.note">
+                <source>These settings live in the description of the edition only. They can be changed without rendering the pages again.</source>
+                <target>Diese Angaben stecken nur in der Beschreibung der Ausgabe. Sie lassen sich ändern, ohne die Seiten neu zu rendern.</target>
+            </trans-unit>
+            <trans-unit id="edit.title.text" resname="edit.title.text">
+                <source>Shown above the viewer and in the title of the browser window.</source>
+                <target>Steht über dem Betrachter und im Titel des Browserfensters.</target>
+            </trans-unit>
+            <trans-unit id="edit.language.text" resname="edit.language.text">
+                <source>Sets the labels in the viewer.</source>
+                <target>Bestimmt die Beschriftungen im Betrachter.</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar.label" resname="edit.colour.bar.label">
+                <source>Colour of the bars</source>
+                <target>Farbe der Leisten</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent.label" resname="edit.colour.accent.label">
+                <source>Accent colour</source>
+                <target>Akzentfarbe</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.pick" resname="edit.colour.pick">
+                <source>Choose a colour</source>
+                <target>Farbe wählen</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar.text" resname="edit.colour.bar.text">
+                <source>Leave empty for the default.</source>
+                <target>Leer lassen für die Vorgabe.</target>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent.text" resname="edit.colour.accent.text">
+                <source>Applies to chapter marks, the page slider, pressed buttons and the outline when using the keyboard. Without a value the default blue-grey is used.</source>
+                <target>Gilt für Kapitelmarken, Seitenregler, gedrückte Schaltflächen und den Rahmen bei Tastatur-Bedienung. Ohne Angabe steht dort das Blaugrau der Vorgabe.</target>
+            </trans-unit>
+            <trans-unit id="edit.teaser.label" resname="edit.teaser.label">
+                <source>Pages in the preview</source>
+                <target>Seiten in der Vorschau</target>
+            </trans-unit>
+            <trans-unit id="edit.teaser.text0" resname="edit.teaser.text0">
+                <source>0 leaves the current extent unchanged.</source>
+                <target>0 lässt den bisherigen Umfang unverändert.</target>
+            </trans-unit>
+            <trans-unit id="edit.download.label" resname="edit.download.label">
+                <source>Offer the download</source>
+                <target>Download anbieten</target>
+            </trans-unit>
+            <trans-unit id="edit.controls.heading" resname="edit.controls.heading">
+                <source>Controls of the viewer</source>
+                <target>Bedienung des Betrachters</target>
+            </trans-unit>
+            <trans-unit id="edit.controls.note" resname="edit.controls.note">
+                <source>What is switched off here the viewer no longer shows – in every place this edition is embedded. Single content elements can hide more on top of that.</source>
+                <target>Was hier abgeschaltet ist, zeigt der Betrachter nicht mehr an – in allen Einbindungen dieser Ausgabe. Einzelne Inhaltselemente können zusätzlich etwas ausblenden.</target>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.note" resname="edit.buttonstyle.note">
+                <source>With "icons only" the label stays as a tooltip and for screen readers.</source>
+                <target>Bei „nur Symbole“ bleibt die Beschriftung als Tooltip und für Vorlesegeräte erhalten.</target>
+            </trans-unit>
+            <trans-unit id="ui.search" resname="ui.search">
+                <source>Search</source>
+                <target>Suche</target>
+            </trans-unit>
+            <trans-unit id="ui.toc" resname="ui.toc">
+                <source>Table of contents</source>
+                <target>Inhaltsverzeichnis</target>
+            </trans-unit>
+            <trans-unit id="ui.thumbs" resname="ui.thumbs">
+                <source>Page overview</source>
+                <target>Seitenübersicht</target>
+            </trans-unit>
+            <trans-unit id="ui.download" resname="ui.download">
+                <source>Download button</source>
+                <target>Download-Schaltfläche</target>
+            </trans-unit>
+            <trans-unit id="ui.zoom" resname="ui.zoom">
+                <source>Zoom</source>
+                <target>Vergrößern</target>
+            </trans-unit>
+            <trans-unit id="ui.print" resname="ui.print">
+                <source>Print</source>
+                <target>Drucken</target>
+            </trans-unit>
+            <trans-unit id="ui.fullscreen" resname="ui.fullscreen">
+                <source>Full screen</source>
+                <target>Vollbild</target>
+            </trans-unit>
+            <trans-unit id="ui.logo" resname="ui.logo">
+                <source>Logo</source>
+                <target>Logo</target>
+            </trans-unit>
+            <trans-unit id="ui.extern" resname="ui.extern">
+                <source>Open in its own window</source>
+                <target>In eigenem Fenster öffnen</target>
+            </trans-unit>
+            <trans-unit id="ui.sound" resname="ui.sound">
+                <source>Offer the page-turn sound</source>
+                <target>Blättergeräusch anbieten</target>
+            </trans-unit>
+            <trans-unit id="ui.soundOn" resname="ui.soundOn">
+                <source>Sound on from the start</source>
+                <target>Geräusch von Anfang an an</target>
+            </trans-unit>
+            <trans-unit id="ui.languages" resname="ui.languages">
+                <source>Language switch</source>
+                <target>Sprachumschaltung</target>
+            </trans-unit>
+            <trans-unit id="ui.nav" resname="ui.nav">
+                <source>Arrows beside the book</source>
+                <target>Pfeile neben dem Buch</target>
+            </trans-unit>
+            <trans-unit id="ui.slider" resname="ui.slider">
+                <source>Page slider</source>
+                <target>Seitenregler</target>
+            </trans-unit>
+            <trans-unit id="ui.marks" resname="ui.marks">
+                <source>Chapter marks</source>
+                <target>Kapitelmarken</target>
+            </trans-unit>
+            <trans-unit id="ui.indicator" resname="ui.indicator">
+                <source>Page number</source>
+                <target>Seitenzahl</target>
+            </trans-unit>
+            <trans-unit id="ui.hint" resname="ui.hint">
+                <source>Usage hint</source>
+                <target>Bedienhinweis</target>
+            </trans-unit>
+            <trans-unit id="colour.orange" resname="colour.orange">
+                <source>ystral orange</source>
+                <target>ystral-Orange</target>
+            </trans-unit>
+            <trans-unit id="colour.darkgrey" resname="colour.darkgrey">
+                <source>Dark grey</source>
+                <target>Dunkelgrau</target>
+            </trans-unit>
+            <trans-unit id="colour.anthracite" resname="colour.anthracite">
+                <source>Anthracite</source>
+                <target>Anthrazit</target>
+            </trans-unit>
+            <trans-unit id="colour.bluegrey" resname="colour.bluegrey">
+                <source>Blue-grey</source>
+                <target>Blaugrau</target>
+            </trans-unit>
+            <trans-unit id="colour.lightblue" resname="colour.lightblue">
+                <source>Light blue (default)</source>
+                <target>Hellblau (Vorgabe)</target>
+            </trans-unit>
+            <trans-unit id="colour.white" resname="colour.white">
+                <source>White</source>
+                <target>Weiß</target>
+            </trans-unit>
+            <trans-unit id="colour.black" resname="colour.black">
+                <source>Black</source>
+                <target>Schwarz</target>
+            </trans-unit>
+            <trans-unit id="toc.entries" resname="toc.entries">
+                <source>Entries</source>
+                <target>Einträge</target>
+            </trans-unit>
+            <trans-unit id="toc.help" resname="toc.help">
+                <source>One entry per line in the form &lt;code&gt;page | title&lt;/code&gt;, for example &lt;code&gt;12 | Slurries as an alternative to powder&lt;/code&gt;. The order follows the page number. Empty lines are ignored.</source>
+                <target>Je Zeile ein Eintrag in der Form &lt;code&gt;Seite | Titel&lt;/code&gt;, zum Beispiel &lt;code&gt;12 | Slurries als Alternative zu Pulver&lt;/code&gt;. Die Reihenfolge sortiert sich nach der Seitenzahl. Leere Zeilen werden übergangen.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

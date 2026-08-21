@@ -1,0 +1,50 @@
+name: TER release
+
+# Bewusst nur von Hand: Ein Release ins TER laesst sich nicht zurueckziehen.
+# Der Tag muss vorher stehen; hier wird nur veroeffentlicht, was es schon gibt.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version, die veroeffentlicht wird (z. B. 1.8.0)'
+        required: true
+      comment:
+        description: 'Kommentar fuer den Eintrag im TER'
+        required: false
+        default: 'See CHANGELOG.md'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+
+      - name: Check that the version matches
+        run: |
+          EMCONF=$(grep -oP "'version' => '\K[^']+" ext_emconf.php)
+          if [ "${EMCONF}" != "${{ inputs.version }}" ]; then
+            echo "::error::ext_emconf.php says ${EMCONF}, the release says ${{ inputs.version }}."
+            exit 1
+          fi
+
+      - name: Install tailor
+        run: composer global require typo3/tailor --prefer-dist --no-progress
+
+      - name: Publish to the TER
+        env:
+          TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+        run: |
+          if [ -z "${TYPO3_API_TOKEN}" ]; then
+            echo "::error::Secret TYPO3_API_TOKEN is not set."
+            exit 1
+          fi
+          php ~/.composer/vendor/bin/tailor ter:publish \
+            --comment "${{ inputs.comment }}" "${{ inputs.version }}"

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" data-stand="{{built}}">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:image" content="thumbs/1.jpg">
+    <link rel="icon" href="thumbs/1.jpg">
+    <link rel="stylesheet" href="assets/page-flip.css?v={{built}}">
+    <link rel="stylesheet" href="assets/viewer.css?v={{built}}">
+    {{theme}}
+</head>
+<body>
+
+<header class="bar">
+    <div class="bar-title">
+        <strong>{{title}}</strong>
+        <span class="bar-pages" id="pageIndicator" data-ui="indicator">{{pageIndicator}}</span>
+    </div>
+    <div class="bar-actions">
+        <div class="search" data-ui="search">
+            <input type="search" id="searchInput" placeholder="{{label.search}}" aria-label="{{label.search}}">
+            <div class="search-results" id="searchResults" hidden></div>
+        </div>
+        <span class="languages" id="languages" data-ui="languages"></span>
+        <button type="button" id="tocToggle" data-ui="toc" title="{{label.toc}}" aria-pressed="false"><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg></span><span class="btn-text">{{label.toc}}</span></button>
+        <button type="button" id="thumbsToggle" data-ui="thumbs" title="{{label.thumbs}}" aria-pressed="false"><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><span class="btn-text">{{label.thumbs}}</span></button>
+        <a href="{{downloadUrl}}" id="downloadLink" data-ui="download" title="{{label.download}}" download><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg></span><span class="btn-text">{{label.download}}</span></a>
+        <button type="button" id="zoomToggle" data-ui="zoom" title="{{label.zoom}}" aria-pressed="false"><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span><span class="btn-text">{{label.zoom}}</span></button>
+        <button type="button" id="printButton" data-ui="print" title="{{label.print}}"><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V3h10v6"/><rect x="4" y="9" width="16" height="7" rx="1"/><path d="M7 14h10v7H7z"/></svg></span><span class="btn-text">{{label.print}}</span></button>
+        <button type="button" id="soundToggle" data-ui="sound" title="{{label.sound}}" aria-pressed="true" hidden><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="ton-an" d="M16.5 8.5a5 5 0 0 1 0 7"/><path class="ton-an" d="M19 6a8.5 8.5 0 0 1 0 12"/><path class="ton-aus" d="M17 9.5l4 5"/><path class="ton-aus" d="M21 9.5l-4 5"/></svg></span><span class="btn-text">{{label.sound}}</span></button>
+        <a href="#" id="externLink" data-ui="extern" title="{{label.extern}}" target="_blank" rel="noopener" hidden><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-8.5 8.5"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span><span class="btn-text">{{label.extern}}</span></a>
+        <button type="button" id="fullscreenToggle" data-ui="fullscreen" title="{{label.fullscreen}}"><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/></svg></span><span class="btn-text">{{label.fullscreen}}</span></button>
+    </div>
+</header>
+
+<main class="stage">
+    <button type="button" class="nav nav-prev" id="prevPage" data-ui="nav" aria-label="{{label.prev}}">&#8249;</button>
+    <div id="book" class="book"></div>
+    <button type="button" class="nav nav-next" id="nextPage" data-ui="nav" aria-label="{{label.next}}">&#8250;</button>
+    <p class="loading" id="loading">{{label.loading}}</p>
+    {{logo}}
+    <aside class="thumbs" id="thumbs" data-ui="thumbs" hidden aria-label="{{label.thumbs}}"></aside>
+    <aside class="toc" id="toc" data-ui="toc" hidden aria-label="{{label.toc}}"></aside>
+
+    <div class="zoom" id="zoom" data-ui="zoom" hidden aria-label="{{label.zoom}}">
+        <div class="zoom-bar">
+            <button type="button" id="zoomOut" aria-label="{{label.zoomOut}}">&minus;</button>
+            <button type="button" id="zoomIn" aria-label="{{label.zoomIn}}">+</button>
+            <button type="button" id="zoomClose" aria-label="{{label.close}}">&times;</button>
+        </div>
+        <div class="zoom-images" id="zoomImages"></div>
+    </div>
+</main>
+
+<footer class="bar bar-footer">
+    <div class="slider-wrap" data-ui="slider">
+        <input type="range" id="pageSlider" min="1" max="{{pageCount}}" value="1" aria-label="{{label.choosePage}}">
+        <div class="slider-marks" id="sliderMarks" data-ui="marks"></div>
+    </div>
+    <span class="hint" data-ui="hint">{{label.hint}}</span>
+</footer>
+
+<script src="assets/page-flip.browser.js?v={{built}}"></script>
+<script src="assets/viewer.js?v={{built}}"></script>
+</body>
+</html>

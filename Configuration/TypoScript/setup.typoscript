@@ -1,0 +1,30 @@
+# Inhaltselement "Blätterbare Ausgabe"
+#
+# Ohne Extbase: Die Einstellungen kommen aus dem FlexForm, die Adresse der
+# Ausgabe setzt der Betrachter selbst zusammen. Der Basispfad steht in den
+# Erweiterungseinstellungen und wird hier über eine Konstante gespiegelt,
+# damit er im Template zur Verfügung steht.
+tt_content.ntflippdf_viewer = FLUIDTEMPLATE
+tt_content.ntflippdf_viewer {
+    templateName = Viewer
+    templateRootPaths {
+        10 = EXT:nt_flippdf/Resources/Private/Templates/ContentElements/
+        20 = {$plugin.tx_ntflippdf.templateRootPath}
+    }
+    dataProcessing {
+        10 = TYPO3\CMS\Frontend\DataProcessing\FlexFormProcessor
+        10 {
+            fieldName = pi_flexform
+            as = einstellungen
+        }
+        20 = Netthinks\NtFlippdf\DataProcessing\IssueProcessor
+        20 {
+            as = ausgabe
+        }
+    }
+    settings {
+        basisAdresse = {$plugin.tx_ntflippdf.basisAdresse}
+        rahmenKlasse = {$plugin.tx_ntflippdf.rahmenKlasse}
+        innenKlasse = {$plugin.tx_ntflippdf.innenKlasse}
+    }
+}

@@ -1,0 +1,101 @@
+# cat=basis/010; type=string; label=Ablageort: Verzeichnis für die fertigen Ausgaben, relativ zum Projektverzeichnis oder absolut
+basePath = public/blaetterbar
+
+# cat=basis/020; type=string; label=Adresse: unter welcher Adresse das Verzeichnis erreichbar ist
+baseUrl = /blaetterbar/
+
+# cat=darstellung/010; type=int+; label=Seitenbreite in Pixeln: bestimmt Schärfe und Gewicht der Seitenbilder
+pageWidth = 1240
+
+# cat=darstellung/020; type=int+; label=JPEG-Qualität der Seitenbilder (1-100)
+jpegQuality = 80
+
+# cat=darstellung/030; type=int+; label=Breite der Vorschaubilder in der Seitenübersicht
+thumbWidth = 200
+
+# cat=download/010; type=boolean; label=Verkleinerte Download-Fassung erzeugen: statt des Originals wird eine leichtere Fassung zum Herunterladen abgelegt
+buildDownloadVersion = 1
+
+# cat=download/020; type=int+; label=Auflösung der Download-Fassung in dpi
+downloadResolution = 120
+
+# cat=basis/030; type=boolean; label=Vor Suchmaschinen schützen: legt im Ablageort eine .htaccess mit "X-Robots-Tag: noindex" an
+protectFromIndexing = 1
+
+# cat=vorschau/010; type=int+; label=Seiten in der Vorschau: so viele Seiten stehen dem Inhaltselement höchstens zur Verfügung, wenn dort "nur Vorschau" gewählt ist. 0 schaltet die Vorschau ab.
+teaserPages = 5
+
+# cat=darstellung/040; type=boolean; label=Vergrößern anbieten
+zoom = 1
+
+# cat=darstellung/050; type=int+; label=Höchste Vergrößerungsstufe
+zoomMax = 3
+
+# cat=darstellung/060; type=boolean; label=Verweise aus dem PDF anklickbar machen
+extractLinks = 1
+
+# cat=umblaettern/010; type=int+; label=Dauer einer Blätterbewegung in Millisekunden (1 = praktisch ohne Bewegung)
+flipDuration = 700
+
+# cat=umblaettern/020; type=boolean; label=Schatten beim Blättern zeichnen
+flipShadows = 1
+
+# cat=umblaettern/030; type=boolean; label=Titelseite einzeln zeigen
+flipCover = 1
+
+# cat=umblaettern/040; type=boolean; label=Ziehen mit der Maus erlauben
+flipDrag = 1
+
+# cat=basis/040; type=string; label=Ordner mit den PDF-Dateien: Nur aus diesen Ordnern werden im Backend-Modul Dateien zur Auswahl angeboten. Mehrere mit Komma trennen, etwa 1:/downloads/,1:/whitepaper/. Leer bedeutet: alle.
+pdfFolders =
+
+# cat=bedienung/010; type=options[ausgeschrieben=text,nur Symbole=icon,Symbol und Beschriftung=both]; label=Schaltflächen im Betrachter: wie die Knöpfe der Kopfleiste beschriftet sind. Bei "nur Symbole" bleibt die Beschriftung als Tooltip und für Vorlesegeräte erhalten.
+uiButtonStyle = text
+
+# cat=bedienung/020; type=boolean; label=Suche anbieten
+uiSearch = 1
+
+# cat=bedienung/030; type=boolean; label=Inhaltsverzeichnis anbieten
+uiToc = 1
+
+# cat=bedienung/040; type=boolean; label=Seitenübersicht anbieten
+uiThumbs = 1
+
+# cat=bedienung/050; type=boolean; label=Download-Schaltfläche anbieten (nur wirksam, wenn die Ausgabe eine Download-Datei hat)
+uiDownload = 1
+
+# cat=bedienung/060; type=boolean; label=Vergrößern-Schaltfläche anbieten
+uiZoom = 1
+
+# cat=bedienung/070; type=boolean; label=Drucken anbieten
+uiPrint = 1
+
+# cat=bedienung/080; type=boolean; label=Vollbild anbieten
+uiFullscreen = 1
+
+# cat=bedienung/090; type=boolean; label=Sprachumschaltung anbieten (nur wirksam, wenn Sprachfassungen verknüpft sind)
+uiLanguages = 1
+
+# cat=bedienung/100; type=boolean; label=Pfeile links und rechts neben dem Buch anbieten
+uiNav = 1
+
+# cat=bedienung/110; type=boolean; label=Seitenregler in der Fußleiste anbieten
+uiSlider = 1
+
+# cat=bedienung/120; type=boolean; label=Kapitelmarken unter dem Seitenregler anzeigen
+uiMarks = 1
+
+# cat=bedienung/130; type=boolean; label=Seitenzahl in der Kopfleiste anzeigen
+uiIndicator = 1
+
+# cat=bedienung/140; type=boolean; label=Bedienhinweis in der Fußleiste anzeigen
+uiHint = 1
+
+# cat=bedienung/150; type=boolean; label="In eigenem Fenster öffnen" anbieten (erscheint nur, wenn der Betrachter eingebettet läuft)
+uiExtern = 1
+
+# cat=bedienung/160; type=boolean; label=Blättergeräusch anbieten: spielt beim Umblättern ein kurzes Rascheln, im Betrachter abschaltbar
+uiSound = 1
+
+# cat=bedienung/170; type=boolean; label=Blättergeräusch von Anfang an eingeschaltet (der Leser kann es im Betrachter umschalten)
+uiSoundOn = 1

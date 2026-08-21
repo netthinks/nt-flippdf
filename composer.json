@@ -1,0 +1,41 @@
+{
+    "name": "netthinks/nt-flippdf",
+    "type": "typo3-cms-extension",
+    "description": "Erzeugt aus einem PDF eine blätterbare Fassung als eigenständiges Verzeichnis - ohne TYPO3 zur Laufzeit, mit Suche, Seitenübersicht und Download.",
+    "keywords": [
+        "TYPO3",
+        "PDF",
+        "flipbook",
+        "page-flip",
+        "whitepaper"
+    ],
+    "homepage": "https://github.com/netthinks/nt-flippdf",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "netthinks",
+            "homepage": "https://netthinks.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/netthinks/nt-flippdf/issues",
+        "source": "https://github.com/netthinks/nt-flippdf"
+    },
+    "require": {
+        "php": ">=8.2",
+        "typo3/cms-core": "^12.4 || ^13.4"
+    },
+    "suggest": {
+        "netthinks/nt-flippdf-pro": "Preview edition and protected full edition, branding, watermark, more languages and counting"
+    },
+    "autoload": {
+        "psr-4": {
+            "Netthinks\\NtFlippdf\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "nt_flippdf"
+        }
+    }
+}

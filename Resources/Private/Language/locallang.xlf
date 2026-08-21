@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-08-21T00:00:00Z" product-name="nt_flippdf">
+        <header/>
+        <body>
+            <trans-unit id="module.heading" resname="module.heading">
+                <source>Page-flip editions</source>
+            </trans-unit>
+            <trans-unit id="env.missing.heading" resname="env.missing.heading">
+                <source>Tools are missing on this server</source>
+            </trans-unit>
+            <trans-unit id="env.missing.text" resname="env.missing.text">
+                <source>Without these programs no edition can be built:</source>
+            </trans-unit>
+            <trans-unit id="list.empty" resname="list.empty">
+                <source>There is no edition yet. The first one can be built from a PDF file below.</source>
+            </trans-unit>
+            <trans-unit id="list.slug" resname="list.slug">
+                <source>Slug</source>
+            </trans-unit>
+            <trans-unit id="list.title" resname="list.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="list.language" resname="list.language">
+                <source>Language</source>
+            </trans-unit>
+            <trans-unit id="list.pages" resname="list.pages">
+                <source>Pages</source>
+            </trans-unit>
+            <trans-unit id="list.toc" resname="list.toc">
+                <source>Contents</source>
+            </trans-unit>
+            <trans-unit id="list.size" resname="list.size">
+                <source>Size</source>
+            </trans-unit>
+            <trans-unit id="list.built" resname="list.built">
+                <source>Built</source>
+            </trans-unit>
+            <trans-unit id="list.toc.none" resname="list.toc.none">
+                <source>none</source>
+            </trans-unit>
+            <trans-unit id="list.outdated" resname="list.outdated">
+                <source>outdated</source>
+            </trans-unit>
+            <trans-unit id="list.outdated.title" resname="list.outdated.title">
+                <source>The source file is newer than the built edition</source>
+            </trans-unit>
+            <trans-unit id="list.preview.badge" resname="list.preview.badge">
+                <source>Preview</source>
+            </trans-unit>
+            <trans-unit id="list.preview.of" resname="list.preview.of">
+                <source>of</source>
+            </trans-unit>
+            <trans-unit id="list.preview.has" resname="list.preview.has">
+                <source>Preview:</source>
+            </trans-unit>
+            <trans-unit id="list.preview.title" resname="list.preview.title">
+                <source>Preview of the edition %s</source>
+            </trans-unit>
+            <trans-unit id="action.view" resname="action.view">
+                <source>View</source>
+            </trans-unit>
+            <trans-unit id="action.edit" resname="action.edit">
+                <source>Edit</source>
+            </trans-unit>
+            <trans-unit id="action.toc" resname="action.toc">
+                <source>Contents</source>
+            </trans-unit>
+            <trans-unit id="action.refresh" resname="action.refresh">
+                <source>Refresh</source>
+            </trans-unit>
+            <trans-unit id="action.refresh.title" resname="action.refresh.title">
+                <source>Refresh the viewer without rendering the pages again</source>
+            </trans-unit>
+            <trans-unit id="action.rebuild" resname="action.rebuild">
+                <source>Rebuild</source>
+            </trans-unit>
+            <trans-unit id="action.rebuild.title" resname="action.rebuild.title">
+                <source>Build again from the same source file</source>
+            </trans-unit>
+            <trans-unit id="action.rebuild.gone" resname="action.rebuild.gone">
+                <source>Rebuilding is not possible: the source file %s is gone</source>
+            </trans-unit>
+            <trans-unit id="action.rebuild.preview" resname="action.rebuild.preview">
+                <source>This preview is written when %s is built and renewed with it</source>
+            </trans-unit>
+            <trans-unit id="action.delete" resname="action.delete">
+                <source>Delete</source>
+            </trans-unit>
+            <trans-unit id="action.delete.confirm" resname="action.delete.confirm">
+                <source>Really delete the edition %s?</source>
+            </trans-unit>
+            <trans-unit id="action.save" resname="action.save">
+                <source>Save</source>
+            </trans-unit>
+            <trans-unit id="action.back" resname="action.back">
+                <source>Back</source>
+            </trans-unit>
+            <trans-unit id="build.heading" resname="build.heading">
+                <source>Build a new edition</source>
+            </trans-unit>
+            <trans-unit id="build.file" resname="build.file">
+                <source>PDF file</source>
+            </trans-unit>
+            <trans-unit id="build.file.choose" resname="build.file.choose">
+                <source>– please choose –</source>
+            </trans-unit>
+            <trans-unit id="build.file.text" resname="build.file.text">
+                <source>The PDF files uploaded most recently are offered. Which folders are taken into account is set in the extension configuration under</source>
+            </trans-unit>
+            <trans-unit id="build.slug" resname="build.slug">
+                <source>Slug</source>
+            </trans-unit>
+            <trans-unit id="build.slug.text" resname="build.slug.text">
+                <source>Letters, digits, hyphen and underscore only. It is also the directory name.</source>
+            </trans-unit>
+            <trans-unit id="build.language.text" resname="build.language.text">
+                <source>Sets the labels in the viewer – search, contents, full screen and so on.</source>
+            </trans-unit>
+            <trans-unit id="build.title" resname="build.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="build.title.placeholder" resname="build.title.placeholder">
+                <source>Shown above the viewer</source>
+            </trans-unit>
+            <trans-unit id="build.download" resname="build.download">
+                <source>Build a smaller version for download</source>
+            </trans-unit>
+            <trans-unit id="build.submit" resname="build.submit">
+                <source>Build edition</source>
+            </trans-unit>
+            <trans-unit id="build.duration" resname="build.duration">
+                <source>Rendering takes from half a minute to several minutes, depending on the extent. Please leave the window open.</source>
+            </trans-unit>
+            <trans-unit id="build.progress.start" resname="build.progress.start">
+                <source>The build is starting …</source>
+            </trans-unit>
+            <trans-unit id="language.de" resname="language.de">
+                <source>German</source>
+            </trans-unit>
+            <trans-unit id="language.en" resname="language.en">
+                <source>English</source>
+            </trans-unit>
+            <trans-unit id="language.fr" resname="language.fr">
+                <source>French</source>
+            </trans-unit>
+            <trans-unit id="language.zh" resname="language.zh">
+                <source>Chinese</source>
+            </trans-unit>
+            <trans-unit id="footer.storage" resname="footer.storage">
+                <source>Storage:</source>
+            </trans-unit>
+            <trans-unit id="footer.address" resname="footer.address">
+                <source>Address:</source>
+            </trans-unit>
+            <trans-unit id="edit.heading" resname="edit.heading">
+                <source>Edit edition: %s</source>
+            </trans-unit>
+            <trans-unit id="edit.source" resname="edit.source">
+                <source>Source file</source>
+            </trans-unit>
+            <trans-unit id="edit.colours" resname="edit.colours">
+                <source>Colours</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar" resname="edit.colour.bar">
+                <source>Bars</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent" resname="edit.colour.accent">
+                <source>Accent</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.text" resname="edit.colour.text">
+                <source>Empty means: the default from the extension configuration.</source>
+            </trans-unit>
+            <trans-unit id="edit.teaser" resname="edit.teaser">
+                <source>Pages in the content element preview</source>
+            </trans-unit>
+            <trans-unit id="edit.teaser.text" resname="edit.teaser.text">
+                <source>0 switches the preview off. It only takes effect where the content element is set to preview.</source>
+            </trans-unit>
+            <trans-unit id="edit.download" resname="edit.download">
+                <source>Offer the download in the viewer</source>
+            </trans-unit>
+            <trans-unit id="edit.download.text" resname="edit.download.text">
+                <source>Only sets the link in the viewer. The stored file stays where it is.</source>
+            </trans-unit>
+            <trans-unit id="edit.controls" resname="edit.controls">
+                <source>Controls of the viewer</source>
+            </trans-unit>
+            <trans-unit id="edit.controls.text" resname="edit.controls.text">
+                <source>What is switched off here is removed from the viewer, not only hidden.</source>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle" resname="edit.buttonstyle">
+                <source>Labels of the buttons</source>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.text" resname="edit.buttonstyle.text">
+                <source>Text</source>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.icon" resname="edit.buttonstyle.icon">
+                <source>Icons only</source>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.both" resname="edit.buttonstyle.both">
+                <source>Icon and label</source>
+            </trans-unit>
+            <trans-unit id="toc.heading" resname="toc.heading">
+                <source>Table of contents: %s</source>
+            </trans-unit>
+            <trans-unit id="toc.text" resname="toc.text">
+                <source>One line per chapter: page number, tab, title. Empty lines are ignored.</source>
+            </trans-unit>
+            <trans-unit id="msg.build.missing" resname="msg.build.missing">
+                <source>Please choose a PDF file and give a slug.</source>
+            </trans-unit>
+            <trans-unit id="msg.build.ok" resname="msg.build.ok">
+                <source>Edition "%s" built: %d pages, %s MB.</source>
+            </trans-unit>
+            <trans-unit id="msg.build.preview" resname="msg.build.preview">
+                <source> Preview "%s" with %d pages, without download.</source>
+            </trans-unit>
+            <trans-unit id="msg.build.failed" resname="msg.build.failed">
+                <source>The edition could not be built: %s</source>
+            </trans-unit>
+            <trans-unit id="msg.refresh.ok" resname="msg.refresh.ok">
+                <source>Viewer of "%s" refreshed.</source>
+            </trans-unit>
+            <trans-unit id="msg.unknown" resname="msg.unknown">
+                <source>There is no edition "%s".</source>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.nosource" resname="msg.rebuild.nosource">
+                <source>No source file is stored for "%s".</source>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.ok" resname="msg.rebuild.ok">
+                <source>%s: built again, %d pages.</source>
+            </trans-unit>
+            <trans-unit id="msg.rebuild.preview" resname="msg.rebuild.preview">
+                <source> Preview "%s" as well.</source>
+            </trans-unit>
+            <trans-unit id="msg.delete.ok" resname="msg.delete.ok">
+                <source>Edition "%s" deleted.</source>
+            </trans-unit>
+            <trans-unit id="msg.delete.failed" resname="msg.delete.failed">
+                <source>The edition "%s" could not be deleted.</source>
+            </trans-unit>
+            <trans-unit id="msg.save.ok" resname="msg.save.ok">
+                <source>Settings for "%s" saved.</source>
+            </trans-unit>
+            <trans-unit id="msg.save.failed" resname="msg.save.failed">
+                <source>The settings could not be saved.</source>
+            </trans-unit>
+            <trans-unit id="msg.toc.ok" resname="msg.toc.ok">
+                <source>Table of contents of "%s" saved: %d chapters.</source>
+            </trans-unit>
+            <trans-unit id="edit.heading.simple" resname="edit.heading.simple">
+                <source>Edit edition</source>
+            </trans-unit>
+            <trans-unit id="edit.meta.slug" resname="edit.meta.slug">
+                <source>Slug</source>
+            </trans-unit>
+            <trans-unit id="edit.meta.pages" resname="edit.meta.pages">
+                <source>pages</source>
+            </trans-unit>
+            <trans-unit id="edit.meta.builtfrom" resname="edit.meta.builtfrom">
+                <source>built from</source>
+            </trans-unit>
+            <trans-unit id="edit.note" resname="edit.note">
+                <source>These settings live in the description of the edition only. They can be changed without rendering the pages again.</source>
+            </trans-unit>
+            <trans-unit id="edit.title.text" resname="edit.title.text">
+                <source>Shown above the viewer and in the title of the browser window.</source>
+            </trans-unit>
+            <trans-unit id="edit.language.text" resname="edit.language.text">
+                <source>Sets the labels in the viewer.</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar.label" resname="edit.colour.bar.label">
+                <source>Colour of the bars</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent.label" resname="edit.colour.accent.label">
+                <source>Accent colour</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.pick" resname="edit.colour.pick">
+                <source>Choose a colour</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.bar.text" resname="edit.colour.bar.text">
+                <source>Leave empty for the default.</source>
+            </trans-unit>
+            <trans-unit id="edit.colour.accent.text" resname="edit.colour.accent.text">
+                <source>Applies to chapter marks, the page slider, pressed buttons and the outline when using the keyboard. Without a value the default blue-grey is used.</source>
+            </trans-unit>
+            <trans-unit id="edit.teaser.label" resname="edit.teaser.label">
+                <source>Pages in the preview</source>
+            </trans-unit>
+            <trans-unit id="edit.teaser.text0" resname="edit.teaser.text0">
+                <source>0 leaves the current extent unchanged.</source>
+            </trans-unit>
+            <trans-unit id="edit.download.label" resname="edit.download.label">
+                <source>Offer the download</source>
+            </trans-unit>
+            <trans-unit id="edit.controls.heading" resname="edit.controls.heading">
+                <source>Controls of the viewer</source>
+            </trans-unit>
+            <trans-unit id="edit.controls.note" resname="edit.controls.note">
+                <source>What is switched off here the viewer no longer shows – in every place this edition is embedded. Single content elements can hide more on top of that.</source>
+            </trans-unit>
+            <trans-unit id="edit.buttonstyle.note" resname="edit.buttonstyle.note">
+                <source>With "icons only" the label stays as a tooltip and for screen readers.</source>
+            </trans-unit>
+            <trans-unit id="ui.search" resname="ui.search">
+                <source>Search</source>
+            </trans-unit>
+            <trans-unit id="ui.toc" resname="ui.toc">
+                <source>Table of contents</source>
+            </trans-unit>
+            <trans-unit id="ui.thumbs" resname="ui.thumbs">
+                <source>Page overview</source>
+            </trans-unit>
+            <trans-unit id="ui.download" resname="ui.download">
+                <source>Download button</source>
+            </trans-unit>
+            <trans-unit id="ui.zoom" resname="ui.zoom">
+                <source>Zoom</source>
+            </trans-unit>
+            <trans-unit id="ui.print" resname="ui.print">
+                <source>Print</source>
+            </trans-unit>
+            <trans-unit id="ui.fullscreen" resname="ui.fullscreen">
+                <source>Full screen</source>
+            </trans-unit>
+            <trans-unit id="ui.logo" resname="ui.logo">
+                <source>Logo</source>
+            </trans-unit>
+            <trans-unit id="ui.extern" resname="ui.extern">
+                <source>Open in its own window</source>
+            </trans-unit>
+            <trans-unit id="ui.sound" resname="ui.sound">
+                <source>Offer the page-turn sound</source>
+            </trans-unit>
+            <trans-unit id="ui.soundOn" resname="ui.soundOn">
+                <source>Sound on from the start</source>
+            </trans-unit>
+            <trans-unit id="ui.languages" resname="ui.languages">
+                <source>Language switch</source>
+            </trans-unit>
+            <trans-unit id="ui.nav" resname="ui.nav">
+                <source>Arrows beside the book</source>
+            </trans-unit>
+            <trans-unit id="ui.slider" resname="ui.slider">
+                <source>Page slider</source>
+            </trans-unit>
+            <trans-unit id="ui.marks" resname="ui.marks">
+                <source>Chapter marks</source>
+            </trans-unit>
+            <trans-unit id="ui.indicator" resname="ui.indicator">
+                <source>Page number</source>
+            </trans-unit>
+            <trans-unit id="ui.hint" resname="ui.hint">
+                <source>Usage hint</source>
+            </trans-unit>
+            <trans-unit id="colour.orange" resname="colour.orange">
+                <source>ystral orange</source>
+            </trans-unit>
+            <trans-unit id="colour.darkgrey" resname="colour.darkgrey">
+                <source>Dark grey</source>
+            </trans-unit>
+            <trans-unit id="colour.anthracite" resname="colour.anthracite">
+                <source>Anthracite</source>
+            </trans-unit>
+            <trans-unit id="colour.bluegrey" resname="colour.bluegrey">
+                <source>Blue-grey</source>
+            </trans-unit>
+            <trans-unit id="colour.lightblue" resname="colour.lightblue">
+                <source>Light blue (default)</source>
+            </trans-unit>
+            <trans-unit id="colour.white" resname="colour.white">
+                <source>White</source>
+            </trans-unit>
+            <trans-unit id="colour.black" resname="colour.black">
+                <source>Black</source>
+            </trans-unit>
+            <trans-unit id="toc.entries" resname="toc.entries">
+                <source>Entries</source>
+            </trans-unit>
+            <trans-unit id="toc.help" resname="toc.help">
+                <source>One entry per line in the form &lt;code&gt;page | title&lt;/code&gt;, for example &lt;code&gt;12 | Slurries as an alternative to powder&lt;/code&gt;. The order follows the page number. Empty lines are ignored.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

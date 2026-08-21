@@ -1,0 +1,71 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+
+<f:variable name="kennung">{einstellungen.settings.kennung}</f:variable>
+<f:variable name="adresse">{settings.basisAdresse}{kennung}/</f:variable>
+<f:comment>Der Baustand haengt an der Adresse: Sonst zeigt ein Browser nach einem
+Neubau weiter die alte Startseite aus seinem Speicher.</f:comment>
+<f:variable name="stand">{f:if(condition: ausgabe.stand, then: 'v={ausgabe.stand}', else: '')}</f:variable>
+<f:comment>Bedienung je Element: Was hier eingestellt ist, wird dem Betrachter
+ueber die Adresse mitgegeben. Die gebaute Ausgabe bleibt unveraendert, dieselbe
+Ausgabe kann also an einer Stelle vollstaendig und an einer anderen abgespeckt
+stehen.</f:comment>
+<f:variable name="stil">{f:if(condition: einstellungen.settings.stil, then: '&stil={einstellungen.settings.stil}', else: '')}</f:variable>
+<f:variable name="ohne">{f:if(condition: einstellungen.settings.ohne, then: '&ohne={einstellungen.settings.ohne}', else: '')}</f:variable>
+<f:variable name="hg">{f:if(condition: ausgabe.hintergrund, then: '&hg={ausgabe.hintergrund}', else: '')}</f:variable>
+<f:variable name="hgdim">{f:if(condition: einstellungen.settings.hgabdunklung, then: '&hgdim={einstellungen.settings.hgabdunklung}', else: '')}</f:variable>
+<f:variable name="hgfit">{f:if(condition: einstellungen.settings.hgpassung, then: '&hgfit={einstellungen.settings.hgpassung}', else: '')}</f:variable>
+<f:variable name="bedienung">{stil}{ohne}{hg}{hgdim}{hgfit}</f:variable>
+<f:variable name="vorschau">{f:if(condition: einstellungen.settings.teaser, then: '?teaser={einstellungen.settings.teaserseiten}&{stand}{bedienung}', else: '?{stand}{bedienung}')}</f:variable>
+
+<div id="c{data.uid}" class="ntflippdf {settings.rahmenKlasse}">
+<f:comment>Die innere Klasse begrenzt die Breite auf den Inhaltsbereich; welche
+das ist, weiß nur das Projekt - deshalb als Konstante.</f:comment>
+<div class="{settings.innenKlasse}">
+
+    <f:if condition="{data.header}">
+        <f:render partial="Header/All" arguments="{_all}" optional="true">
+            <h2 class="ntflippdf-header">{data.header}</h2>
+        </f:render>
+    </f:if>
+
+    <f:if condition="{kennung}">
+        <f:then>
+            <f:if condition="{einstellungen.settings.darstellung} == 'knopf'">
+                <f:then>
+                    <p class="ntflippdf-actions">
+                        <a class="ntflippdf-button standard-button" href="{adresse}{vorschau}" target="_blank" rel="noopener">
+                            <f:if condition="{einstellungen.settings.knopftext}">
+                                <f:then>{einstellungen.settings.knopftext}</f:then>
+                                <f:else>Durchblättern</f:else>
+                            </f:if>
+                        </a>
+                    </p>
+                </f:then>
+                <f:else>
+                    <div class="ntflippdf-frame">
+                        <iframe src="{adresse}{vorschau}"
+                                title="{data.header}"
+                                loading="lazy"
+                                allowfullscreen="allowfullscreen"
+                                style="width:100%;border:0;height:{f:if(condition: einstellungen.settings.hoehe, then: einstellungen.settings.hoehe, else: 700)}px"></iframe>
+                    </div>
+                    <f:comment>In der Vorschau führt "In neuem Fenster öffnen" nur auf dieselben
+                    paar Seiten - dort bringt es nichts. Im Betrachter gibt es ohnehin den
+                    Vollbildknopf. Bleibt nichts übrig, entfällt die ganze Zeile.</f:comment>
+                    <f:comment>Kein Verweis mehr unter dem Rahmen: Der Betrachter bietet das
+                    Öffnen in einem eigenen Fenster selbst an, dort mit der Seite, die gerade
+                    aufgeschlagen ist. Den Download ebenso.</f:comment>
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:else>
+            <p class="ntflippdf-hinweis">Für dieses Element ist noch keine Ausgabe ausgewählt.</p>
+        </f:else>
+    </f:if>
+
+</div>
+</div>
+
+</f:spaceless>
+</html>

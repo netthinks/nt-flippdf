@@ -1,0 +1,523 @@
+/* Betrachter für die blätterbaren Ausgaben.
+   Die vier Farben lassen sich beim Bauen überschreiben; index.html setzt sie
+   dann als Inline-Stil, sodass jede Ausgabe zum Auftritt ihrer Website passt. */
+
+:root {
+    --bar: #1f2933;
+    --bar-text: #ffffff;
+    --stage: #2b2b2b;
+    --accent: #7aa2c2;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--stage);
+    color: #e9e9e9;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+}
+
+.bar {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: .6rem 1rem;
+    background: var(--bar);
+    color: var(--bar-text);
+}
+
+.bar-title { display: flex; align-items: baseline; gap: .75rem; min-width: 0; }
+.bar-title strong { font-size: 1.05rem; }
+.bar-pages { font-size: .85rem; opacity: .8; white-space: nowrap; }
+
+.bar-actions { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+
+/* Die Kapitelmarken sind ebenfalls Schaltflaechen in einer Leiste, sollen aber
+   nicht wie die Knoepfe der Kopfleiste aussehen - deshalb hier ausgenommen. */
+.bar button:not(.slider-mark),
+.bar a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font: inherit;
+    font-size: .9rem;
+    line-height: 1.2;
+    color: var(--bar-text);
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 3px;
+    padding: .35rem .7rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Beschriftung der Schaltflaechen: ausgeschrieben, nur Symbol oder beides.
+   Bei "nur Symbol" bleibt der Text im Markup - Tooltip und Vorlesegeraete
+   brauchen ihn, sichtbar ist er nicht. */
+.bar .btn-icon { display: none; line-height: 0; }
+.bar .btn-icon svg { display: block; }
+
+[data-knopfstil="both"] .bar .btn-icon,
+[data-knopfstil="icon"] .bar .btn-icon { display: inline-flex; }
+
+[data-knopfstil="icon"] .bar .btn-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+[data-knopfstil="icon"] .bar button,
+[data-knopfstil="icon"] .bar a {
+    padding: .35rem;
+    gap: 0;
+}
+
+.bar button:not(.slider-mark):hover,
+.bar a:hover { background: rgba(255, 255, 255, .22); }
+.bar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #22303a; }
+
+.bar :focus-visible,
+.thumbs :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.search { position: relative; }
+.search input {
+    font: inherit;
+    font-size: .9rem;
+    padding: .35rem .7rem;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: rgba(255, 255, 255, .12);
+    color: var(--bar-text);
+    width: 15rem;
+    max-width: 40vw;
+}
+.search input::placeholder { color: rgba(255, 255, 255, .65); }
+
+.search-results {
+    position: absolute;
+    top: calc(100% + .3rem);
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    background: #fff;
+    color: #222;
+    border-radius: 3px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+    z-index: 20;
+}
+/* Die Trefferliste haengt in der Kopfleiste, faellt damit aber unter die Regel
+   fuer deren Schaltflaechen - weisse Schrift auf weissem Grund. Deshalb hier
+   mit derselben Reichweite dagegengehalten. */
+.bar .search-results button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+    color: #222;
+    padding: .5rem .7rem;
+    font-size: .85rem;
+    line-height: 1.35;
+    cursor: pointer;
+}
+.bar .search-results button:hover { background: #f3f6f8; }
+.search-results mark { background: var(--accent); }
+.search-results .empty { padding: .6rem .7rem; font-size: .85rem; color: #666; }
+
+/* Sicherheitsnetz: kein waagerechtes Scrollen, falls die Buchbreite doch
+   einmal die Bühne übersteigt. */
+.stage {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 1rem;
+}
+
+/* Hintergrundbild hinter dem Buch.
+   Zwei Ebenen: das Bild selbst und darueber ein Schleier in der Buehnenfarbe.
+   Ohne den Schleier steht das Buch je nach Motiv in einem unruhigen Umfeld und
+   die Seiten verlieren an Kontrast; wie stark er ist, gibt --stage-dim vor.
+   Beide Ebenen liegen hinter allem anderen (z-index 0), das Buch und die
+   Schaltflaechen bekommen ihre eigene Ebene. */
+.stage::before,
+.stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+.stage::before {
+    background-image: var(--stage-image, none);
+    background-size: var(--stage-size, cover);
+    background-repeat: var(--stage-repeat, no-repeat);
+    background-position: center;
+}
+.stage::after {
+    background: var(--stage);
+    opacity: var(--stage-dim, 0);
+}
+/* Ohne Hintergrundbild steht --stage-dim auf 0, der Schleier ist dann
+   unsichtbar - eine eigene Ausnahme braucht es dafuer nicht. */
+.stage > * { position: relative; z-index: 1; }
+
+.book-holder {
+    max-width: 100%;
+    transition: width .2s ease;
+}
+
+.book {
+    max-width: 100%;
+    transition: transform .3s ease;
+}
+
+/* Titel- und Rückseite stehen als Einzelseite in einer Doppelseiten-Fläche.
+   Das Titelblatt liegt rechts, die Rückseite links – beide werden in die Mitte
+   gerückt, aber in entgegengesetzte Richtungen. */
+.stage.is-single.is-first .book { transform: translateX(-25%); }
+.stage.is-single.is-last .book { transform: translateX(25%); }
+.stage.is-portrait .book { transform: none; }
+.book img { display: block; width: 100%; height: 100%; }
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    font-size: 2rem;
+    line-height: 1;
+    width: 2.4rem;
+    height: 3.6rem;
+    color: #fff;
+    background: rgba(0, 0, 0, .35);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.nav:hover { background: rgba(0, 0, 0, .55); }
+.nav-prev { left: .5rem; }
+.nav-next { right: .5rem; }
+
+.loading { position: absolute; font-size: .95rem; opacity: .8; }
+
+/* Ohne diese Regel gewinnt display:grid gegen das [hidden]-Attribut */
+.thumbs[hidden] { display: none; }
+
+/* Innerhalb der Bühne statt über dem ganzen Fenster: so beginnt die Liste
+   unter der Kopfleiste und endet über dem Seitenregler, statt darunter zu
+   verschwinden. */
+.thumbs {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 220px;
+    padding: 1rem .75rem;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(4px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+    align-content: start;
+    z-index: 15;
+}
+.thumbs button { padding: 0; border: 2px solid transparent; background: none; cursor: pointer; }
+.thumbs button[aria-current="true"] { border-color: var(--accent); }
+.thumbs img { width: 100%; display: block; }
+.thumbs span { display: block; text-align: center; font-size: .7rem; color: #ddd; }
+
+.bar-footer { gap: 1rem; position: relative; }
+#pageSlider { flex: 1; min-width: 8rem; accent-color: var(--accent); }
+
+/* Bedienhinweis. Er stand fest in der Fussleiste und nahm dort dauerhaft
+   ein Drittel der Breite weg - gebraucht wird er aber nur beim ersten Mal.
+   Deshalb schwebt er jetzt ueber der Leiste, zeigt sich einmal je Ausgabe und
+   verschwindet nach ein paar Sekunden oder beim ersten Blaettern. */
+.hint {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + .4rem);
+    transform: translateX(-50%);
+    z-index: 5;
+    padding: .35rem .7rem;
+    border-radius: 999px;
+    background: var(--bar);
+    color: var(--bar-text);
+    font-size: .8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+    opacity: 0;
+    transition: opacity .4s ease-out;
+}
+.hint.hint-an { opacity: .92; }
+
+@media (max-width: 900px) {
+    /* Gewischt wird direkt auf der Seite; die Pfeiltasten würden sie nur verdecken */
+    .nav { display: none; }
+    .stage { padding: .5rem; }
+}
+
+@media (max-width: 700px) {
+    .bar { padding: .45rem .6rem; gap: .4rem .5rem; }
+    .bar-title { width: 100%; }
+    .bar-title strong { font-size: .95rem; }
+    /* Umbruch erlauben: Suchfeld auf eine eigene Zeile, Schaltflächen
+       darunter. Ohne das lief die Leiste auf dem Telefon seitlich hinaus. */
+    .bar-actions { width: 100%; flex-wrap: wrap; }
+    .search { flex: 1 1 100%; order: -1; }
+    .bar button:not(.slider-mark), .bar a { font-size: .8rem; padding: .3rem .5rem; white-space: nowrap; }
+    .hint { display: none; }
+    .thumbs { width: 150px; grid-template-columns: 1fr; }
+    .search input { width: 100%; max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stf__item { transition: none !important; }
+}
+
+/* Inhaltsverzeichnis - liegt an derselben Stelle wie die Seitenübersicht,
+   deshalb ist immer nur eines von beiden offen. */
+.toc[hidden] { display: none; }
+.toc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 80vw;
+    padding: 1rem .75rem;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    z-index: 15;
+}
+.toc button {
+    display: flex;
+    gap: .75rem;
+    align-items: baseline;
+    width: 100%;
+    padding: .5rem .5rem;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    color: #eee;
+    font: inherit;
+    font-size: .9rem;
+    text-align: left;
+    cursor: pointer;
+}
+.toc button:hover { background: rgba(255, 255, 255, .12); }
+.toc .toc-title { flex: 1; }
+.toc .toc-page { opacity: .7; font-variant-numeric: tabular-nums; }
+.toc :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 700px) {
+    .toc { width: 100%; max-width: none; }
+}
+
+/* Verweise aus dem PDF: unsichtbar, bis man mit der Maus darübergeht. */
+.page { position: relative; }
+.page-link {
+    position: absolute;
+    display: block;
+    border-radius: 2px;
+    background: rgba(255, 210, 0, 0);
+    transition: background .15s ease;
+}
+.page-link:hover,
+.page-link:focus-visible { background: rgba(255, 210, 0, .35); outline: none; }
+
+/* Kapitelmarken unter dem Seitenregler */
+.slider-wrap { position: relative; flex: 1; min-width: 8rem; }
+.slider-wrap #pageSlider { width: 100%; }
+/* Kapitelmarken unter dem Seitenregler.
+   Der duenne Strich ging im Regler unter. Jetzt zeigt ein Dreieck nach oben
+   auf die Stelle, sitzt direkt unter der Schiene und traegt eine Trefferflaeche,
+   die groesser ist als das sichtbare Zeichen. Beim Ueberfahren nennt es sein
+   Kapitel. */
+.slider-marks { position: relative; height: 1.5rem; margin-top: -.35rem; }
+.slider-mark {
+    position: absolute;
+    top: 0;
+    width: 1.4rem;
+    height: 1.5rem;
+    padding: 0;
+    margin-left: -.7rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+/* Das Zeichen: ein Dreieck, das auf die Stelle in der Schiene zeigt, mit einem
+   kurzen Balken darunter. Zusammen sind sie gross genug, um im Regler nicht
+   unterzugehen. */
+.slider-mark::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 13px;
+    height: 7px;
+    margin-left: -6.5px;
+    background: var(--accent);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    transition: transform .12s ease-out;
+    transform-origin: 50% 0;
+}
+.slider-mark::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    width: 13px;
+    height: 3px;
+    margin-left: -6.5px;
+    border-radius: 0 0 2px 2px;
+    background: var(--accent);
+    opacity: .55;
+    transition: opacity .12s ease-out;
+}
+.slider-mark:hover::before,
+.slider-mark:focus-visible::before { transform: scale(1.35); }
+.slider-mark:hover::after,
+.slider-mark:focus-visible::after { opacity: 1; }
+.slider-mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 3px; }
+
+/* Kapitelname beim Ueberfahren - der Tooltip des Browsers kommt zu spaet. */
+.slider-mark .mark-title {
+    position: absolute;
+    bottom: 1.45rem;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 14rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .22rem .5rem;
+    border-radius: 3px;
+    background: var(--bar);
+    color: var(--bar-text);
+    font-size: .75rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .12s ease-out;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+    z-index: 3;
+}
+.slider-mark:hover .mark-title,
+.slider-mark:focus-visible .mark-title { opacity: 1; }
+
+/* Ton-Schalter: dasselbe Symbol zeigt beide Zustaende, je nachdem welche
+   Striche sichtbar sind - Schallwellen oder das Kreuz. */
+.bar #soundToggle[aria-pressed="true"] .ton-aus,
+.bar #soundToggle[aria-pressed="false"] .ton-an { display: none; }
+.bar #soundToggle[aria-pressed="true"] { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .25); color: var(--bar-text); }
+
+/* Logo ueber der Buehne. Neun Ankerpunkte, damit es sich aus dem Weg der
+   Seiten und der Blaetterpfeile setzen laesst. Es faengt keine Klicks ab -
+   ausser es ist selbst ein Verweis. */
+.marke {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    padding: .75rem;
+    line-height: 0;
+}
+.marke a { pointer-events: auto; }
+.marke img { display: block; height: auto; max-width: 40vw; }
+
+.marke-oben-links   { top: 0; left: 0; }
+.marke-oben-mitte   { top: 0; left: 50%; transform: translateX(-50%); }
+.marke-oben-rechts  { top: 0; right: 0; }
+.marke-mitte-links  { top: 50%; left: 0; transform: translateY(-50%); }
+.marke-mitte        { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.marke-mitte-rechts { top: 50%; right: 0; transform: translateY(-50%); }
+.marke-unten-links  { bottom: 0; left: 0; }
+.marke-unten-mitte  { bottom: 0; left: 50%; transform: translateX(-50%); }
+.marke-unten-rechts { bottom: 0; right: 0; }
+
+@media (max-width: 700px) {
+    /* Auf dem Telefon wuerde ein Logo an den Seiten mit den Blaetterflaechen
+       ins Gehege kommen. */
+    .marke img { max-width: 28vw; }
+}
+
+/* Sprachwahl */
+.languages { display: inline-flex; gap: .25rem; }
+
+/* Vergrößern: eigene Ebene über allem, mit eigenem Rollbereich */
+.zoom[hidden] { display: none; }
+.zoom {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(0, 0, 0, .92);
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+.zoom-bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: .4rem;
+    padding: .5rem .75rem;
+    background: linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, 0));
+}
+.zoom-bar button {
+    font: inherit;
+    min-width: 2.2rem;
+    padding: .3rem .6rem;
+    color: #fff;
+    background: rgba(255, 255, 255, .15);
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 3px;
+    cursor: pointer;
+}
+.zoom-images {
+    --zoom: 1.4;
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    width: calc(100% * var(--zoom));
+    padding: 0 0 2rem;
+}
+.zoom-images img { width: 100%; height: auto; display: block; }
+
+@media (max-width: 700px) {
+    .zoom-images { --zoom: 2; }
+}
+
+/* Grund eines Ladefehlers - klein unter der Meldung */
+.loading-grund { display: inline-block; margin-top: .4rem; font-size: .8rem; opacity: .7; }
