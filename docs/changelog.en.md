@@ -6,6 +6,20 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.8.5] – 2026-08-21
+
+### Fixed
+
+- **The zoom no longer jumps on the first notch.** It began at a level where the
+  page fills the whole width — coming from a book that takes up a third of it,
+  that is a leap, and the corner of the page was cut off. The wheel now opens
+  the zoom at exactly the size the book has on the stage and grows from there,
+  each notch about a tenth larger than the one before. Proportional steps
+  instead of fixed ones, so it feels the same close up and far out. The page is
+  centred while it is narrower than the surface.
+
+---
+
 ## [1.8.4] – 2026-08-21
 
 ### Added

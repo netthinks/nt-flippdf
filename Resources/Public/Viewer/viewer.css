@@ -511,6 +511,9 @@ body {
     gap: 0;
     align-items: flex-start;
     width: calc(100% * var(--zoom));
+    /* Beim Einstieg ueber das Mausrad ist die Seite schmaler als die Flaeche -
+       dann gehoert sie in die Mitte und nicht an den linken Rand. */
+    margin-inline: auto;
     padding: 0 0 2rem;
 }
 .zoom-images img { width: 100%; height: auto; display: block; }

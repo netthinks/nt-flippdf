@@ -6,6 +6,21 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.8.5] – 2026-08-21
+
+### Behoben
+
+- **Die Vergrößerung springt beim ersten Dreh nicht mehr.** Sie begann auf einer
+  Stufe, auf der die Seite die volle Breite füllt — von einem Buch aus, das ein
+  Drittel davon einnimmt, ist das ein Satz, und die Ecke der Seite war
+  angeschnitten. Das Rad öffnet die Vergrößerung jetzt genau in der Größe, die
+  das Buch auf der Bühne hat, und wächst von dort aus weiter, jede Raste etwa
+  ein Zehntel mehr als die vorige. Anteilige Schritte statt fester, damit es
+  nah wie fern gleich ruhig wirkt. Solange die Seite schmaler ist als die
+  Fläche, steht sie mittig.
+
+---
+
 ## [1.8.4] – 2026-08-21
 
 ### Hinzugefügt

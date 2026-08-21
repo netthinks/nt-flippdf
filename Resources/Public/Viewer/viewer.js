@@ -1027,7 +1027,11 @@
             el.zoomToggle.setAttribute('aria-pressed', String(an));
             if (an) {
                 fuelle();
-                setzeStufe(1.4);
+                /* Die Groesse laesst sich erst messen, wenn die Vergroesserung
+                   sichtbar ist - vorher hat ihr Behaelter keine Breite. */
+                kleinste = vomRad ? stufeWieAufDerBuehne() : 1;
+                setzeStufe(vomRad ? kleinste : 1.4);
+                vomRad = false;
             } else {
                 el.zoomBilder.innerHTML = '';
             }
@@ -1045,9 +1049,34 @@
             });
         }
 
+        // Kleinste Stufe. Sie liegt normalerweise bei 1; oeffnet das Mausrad die
+        // Vergroesserung, wird sie auf die Groesse gesetzt, die das Buch auf der
+        // Buehne gerade hat - sonst waere schon der erste Dreh ein Satz.
+        var kleinste = 1;
+        var vomRad = false;
+
         function setzeStufe(neu) {
-            stufe = Math.min(maximum, Math.max(1, neu));
+            stufe = Math.min(maximum, Math.max(kleinste, neu));
             el.zoomBilder.style.setProperty('--zoom', String(stufe));
+        }
+
+        /**
+         * Welche Stufe zeigt die Seite so gross, wie sie auf der Buehne steht?
+         *
+         * In der Vergroesserung fuellt die Seite bei Stufe 1 die volle Breite,
+         * auf der Buehne ist sie deutlich schmaler. Wer das Rad eine Raste
+         * dreht, wuerde ohne diese Rechnung von etwa einem Drittel auf volle
+         * Breite springen - genau der Satz, der stoert.
+         */
+        function stufeWieAufDerBuehne() {
+            var seite = document.querySelector('.stf__item') || el.book;
+            var behaelter = el.zoomBilder.parentElement || el.zoom;
+            if (!seite || !behaelter || !behaelter.clientWidth) {
+                return 1;
+            }
+            var verhaeltnis = seite.getBoundingClientRect().width / behaelter.clientWidth;
+
+            return Math.min(1, Math.max(0.15, verhaeltnis));
         }
 
         el.zoom.addEventListener('seitenwechsel', fuelle);
@@ -1070,12 +1099,16 @@
 
         el.zoom.addEventListener('wheel', function (event) {
             event.preventDefault();
-            if (event.deltaY > 0 && stufe <= 1.0001) {
+            if (event.deltaY > 0 && stufe <= kleinste + 0.0001) {
                 zeige(false);
 
                 return;
             }
-            setzeStufe(stufe + (event.deltaY < 0 ? schritt(event) : -schritt(event)));
+            /* Anteilig statt in festen Sprüngen: Ein Zehntel mehr wirkt bei
+               kleiner Ansicht genauso ruhig wie bei grosser. Fest addierte
+               Schritte waeren am Anfang ein Satz und spaeter kaum zu merken. */
+            var faktor = 1 + schritt(event);
+            setzeStufe(event.deltaY < 0 ? stufe * faktor : stufe / faktor);
         }, { passive: false });
 
         /* Mausrad ueber dem Buch.
@@ -1131,8 +1164,9 @@
                bei der Groesse an, die sie ohne Zutun haette, und waechst dann
                mit jeder weiteren Raste. Der Knopf oben bleibt beim
                bisherigen Sprung - ein Klick darauf heisst "deutlich groesser". */
+            vomRad = true;
             zeige(true);
-            setzeStufe(1 + schritt(event));
+            setzeStufe(stufe * (1 + schritt(event)));
         }, { passive: false });
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && !el.zoom.hidden) { zeige(false); }
