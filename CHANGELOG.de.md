@@ -4,6 +4,20 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.8.2] – 2026-08-21
+
+### Geändert
+
+- **Das Mausrad allein vergrößert dort, wo es nichts zu scrollen gibt.** Steht
+  der Betrachter für sich – im eigenen Fenster oder im Vollbild –, genügt eine
+  Radumdrehung zum Vergrößern. Eingebettet auf einer Seite nicht: Dort scrollt
+  das Rad die Seite, und ein Betrachter, der es verschluckt, hält den Besucher
+  fest – dieselbe Falle, wegen der auch eingebettete Karten die Strg-Taste
+  verlangen. Wer es dort ohne Taste versucht, bekommt kurz den Hinweis darauf,
+  und die Seite scrollt weiter.
+
+---
+
 ## [1.8.1] – 2026-08-21
 
 ### Hinzugefügt

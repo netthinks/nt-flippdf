@@ -1061,17 +1061,52 @@
             setzeStufe(stufe + (event.deltaY < 0 ? 0.2 : -0.2));
         }, { passive: false });
 
-        /* Strg und Mausrad ueber dem Buch: Der erste Griff zum Vergroessern ist
-           bei den meisten nicht die Lupe, sondern genau diese Geste. Ohne uns
-           zoomt der Browser die ganze Seite - eingebettet also Kopf- und
-           Fussbereich der Website, waehrend das Buch gleich gross bleibt.
-           Deshalb fangen wir sie ab und oeffnen die Vergroesserung.
-           Zwei Finger auf dem Trackpad melden sich als dasselbe Ereignis und
-           sind damit ebenfalls abgedeckt. */
+        /* Mausrad ueber dem Buch.
+         *
+         * Steht der Betrachter fuer sich - eigenes Fenster oder Vollbild -,
+         * genuegt das Rad allein: Es gibt dort nichts zu scrollen, und
+         * Vergroessern ist der einzige sinnvolle Griff.
+         *
+         * Eingebettet auf einer Seite ist das anders. Dort scrollt man mit dem
+         * Rad die Seite, und ein Betrachter, der es verschluckt, haelt den
+         * Besucher fest - dieselbe Falle, wegen der auch eingebettete Karten
+         * die Strg-Taste verlangen. Also bleibt es dort bei Strg und Rad, und
+         * wer es ohne versucht, bekommt einmal den Hinweis darauf.
+         *
+         * Zwei Finger auf dem Trackpad melden sich als Rad mit ctrlKey und
+         * sind damit in beiden Faellen abgedeckt. */
         var buehne = document.querySelector('.stage') || document.body;
+        var hinweisOffen = false;
+
+        function frei() {
+            return window.self === window.top || document.fullscreenElement !== null;
+        }
+
+        function radHinweis() {
+            if (hinweisOffen || !buehne) { return; }
+            var text = label('wheelHint');
+            if (!text || text === 'wheelHint') { return; }
+            var fahne = document.createElement('div');
+            fahne.className = 'rad-hinweis';
+            fahne.textContent = text;
+            buehne.appendChild(fahne);
+            hinweisOffen = true;
+            window.setTimeout(function () {
+                fahne.classList.add('weg');
+                window.setTimeout(function () { fahne.remove(); hinweisOffen = false; }, 400);
+            }, 1600);
+        }
+
         buehne.addEventListener('wheel', function (event) {
-            if (!event.ctrlKey && !event.metaKey) { return; }
             if (!el.zoom.hidden) { return; }
+            var mitTaste = event.ctrlKey || event.metaKey;
+
+            if (!mitTaste && !frei()) {
+                // Die Seite darf weiterscrollen - nur der Hinweis erscheint.
+                radHinweis();
+
+                return;
+            }
             if (event.deltaY > 0) { return; }
             event.preventDefault();
             // Beim Oeffnen nicht zusaetzlich vergroessern: Die Vergroesserung

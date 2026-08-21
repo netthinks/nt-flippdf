@@ -521,3 +521,26 @@ body {
 
 /* Grund eines Ladefehlers - klein unter der Meldung */
 .loading-grund { display: inline-block; margin-top: .4rem; font-size: .8rem; opacity: .7; }
+
+/* Hinweis auf die Strg-Taste beim Scrollen.
+   Er erscheint nur im eingebetteten Betrachter: Dort scrollt das Rad die
+   Seite, und wer vergroessern will, braucht die Taste dazu. Mitten auf der
+   Buehne, damit er dort steht, wo gerade gescrollt wurde - und ohne
+   Mausereignisse, damit er nichts blockiert. */
+.rad-hinweis {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .72);
+    color: #fff;
+    font-size: .9rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity .35s ease-out;
+}
+.rad-hinweis.weg { opacity: 0; }

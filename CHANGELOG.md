@@ -4,6 +4,19 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.8.2] – 2026-08-21
+
+### Changed
+
+- **The mouse wheel alone zooms where there is nothing to scroll.** Standing on
+  its own – in its own window or in full screen – the viewer takes a plain
+  wheel turn as "zoom in". Embedded on a page it does not: there the wheel
+  scrolls the page, and a viewer that swallows it holds the visitor captive –
+  the same trap that makes embedded maps ask for the Ctrl key. Whoever tries it
+  without the key gets a short note saying so, and the page keeps scrolling.
+
+---
+
 ## [1.8.1] – 2026-08-21
 
 ### Added
