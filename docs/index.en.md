@@ -48,7 +48,7 @@ header buttons come spelled out, as icons only, or as both.
 
 ## Requirements
 
-* TYPO3 12.4 or 13.4, PHP 8.2 or newer
+* TYPO3 12.4, 13.4 or 14.x, PHP 8.2 or newer
 * **Ghostscript** (`gs`) renders the pages
 * **ImageMagick** (`magick` or `convert`) makes the thumbnails
 * `pdfinfo` and `pdftotext` from the poppler package are optional; they speed up

@@ -53,7 +53,7 @@ als beides.
 
 ## Voraussetzungen
 
-* TYPO3 12.4 oder 13.4, PHP 8.2 oder neuer
+* TYPO3 12.4, 13.4 oder 14.x, PHP 8.2 oder neuer
 * **Ghostscript** (`gs`) rendert die Seiten
 * **ImageMagick** (`magick` oder `convert`) erzeugt die Vorschaubilder
 * `pdfinfo` und `pdftotext` aus dem Poppler-Paket sind optional; sie

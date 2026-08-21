@@ -4,6 +4,26 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.8.4] – 2026-08-21
+
+### Hinzugefügt
+
+- **TYPO3 14.** Auf 14.3 durchgeprüft: Bauen auf der Kommandozeile und im Modul,
+  Betrachter, Inhaltselement, Vorschau im Seitenmodul, Backend-Modul in beiden
+  Sprachen. Drei Stellen mussten nachgeben — `StandaloneView` gibt es in 14
+  nicht mehr, das Seitenmodul übergibt ein Datensatz-Objekt statt eines Feldes,
+  und das FlexForm eines Elements kommt bereits aufgelöst an. Alle drei sind für
+  12.4, 13.4 und 14 gleichermaßen abgedeckt.
+
+### Geändert
+
+- **Die Vergrößerung wächst schrittweise.** Eine Raste am Mausrad sprang bisher
+  auf 140 %. Sie beginnt jetzt dort, wo das Buch aufhört, und wächst mit jeder
+  weiteren Raste; wie weit eine Raste trägt, leitet sich aus dem ab, was das
+  Gerät meldet — Mausrad und Trackpad laufen damit gleich ruhig.
+
+---
+
 ## [1.8.3] – 2026-08-21
 
 ### Behoben

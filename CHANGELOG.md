@@ -4,6 +4,26 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.8.4] – 2026-08-21
+
+### Added
+
+- **TYPO3 14 support.** Tested through on 14.3: building on the command line and
+  in the module, the viewer, the content element, the preview in the page
+  module, the backend module in both languages. Three places had to give way —
+  `StandaloneView` is gone in 14, the page module hands over a record object
+  instead of an array, and the FlexForm of an element arrives already resolved.
+  All three are handled for 12.4, 13.4 and 14 alike.
+
+### Changed
+
+- **The zoom grows step by step.** One notch of the wheel used to jump to 140 %.
+  It now starts where the book left off and grows with every further notch; how
+  far one notch takes is derived from what the device reports, so a mouse wheel
+  and a trackpad both move at the same calm pace.
+
+---
+
 ## [1.8.3] – 2026-08-21
 
 ### Fixed

@@ -7,10 +7,10 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'netthinks',
     'author_email' => 'info@netthinks.com',
     'state' => 'stable',
-    'version' => '1.8.3',
+    'version' => '1.8.4',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-13.4.99',
+            'typo3' => '12.4.0-14.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],

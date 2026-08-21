@@ -28,8 +28,11 @@ class ViewerPreview extends StandardContentPreviewRenderer
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
-        $daten = $item->getRecord();
-        $einstellungen = $this->flexform((string)($daten['pi_flexform'] ?? ''));
+        /* Bis TYPO3 13 kommt hier ein Feld-Array, ab 14 ein Record-Objekt.
+           Beides taugt, sobald man es gleich behandelt. */
+        $satz = $item->getRecord();
+        $daten = is_array($satz) ? $satz : $satz->toArray();
+        $einstellungen = $this->flexform($daten['pi_flexform'] ?? '');
         $kennung = trim((string)($einstellungen['kennung'] ?? ''));
 
         if ($kennung === '') {
@@ -219,8 +222,27 @@ class ViewerPreview extends StandardContentPreviewRenderer
      *
      * @return array<string, string>
      */
-    private function flexform(string $inhalt): array
+    /**
+     * Die Einstellungen des Elements als schlichtes Feld-Array.
+     *
+     * Bis TYPO3 13 steht im Datensatz das rohe XML, ab 14 ein bereits
+     * aufgeloestes Objekt. Beides fuehrt hier zum selben Ergebnis.
+     *
+     * @param mixed $inhalt XML oder aufgeloeste Werte
+     * @return array<string, string>
+     */
+    private function flexform(mixed $inhalt): array
     {
+        if (is_object($inhalt) && method_exists($inhalt, 'toArray')) {
+            $werte = [];
+            foreach ($this->flach($inhalt->toArray()) as $name => $wert) {
+                $werte[str_replace('settings.', '', (string)$name)] = is_scalar($wert) ? (string)$wert : '';
+            }
+
+            return $werte;
+        }
+
+        $inhalt = (string)$inhalt;
         if (trim($inhalt) === '') {
             return [];
         }
@@ -231,6 +253,26 @@ class ViewerPreview extends StandardContentPreviewRenderer
         $werte = [];
         foreach ((array)($daten['data']['sDEF']['lDEF'] ?? []) as $name => $feld) {
             $werte[str_replace('settings.', '', (string)$name)] = (string)($feld['vDEF'] ?? '');
+        }
+
+        return $werte;
+    }
+
+    /**
+     * Zieht die Werte aus der Blattstruktur heraus, die TYPO3 14 liefert.
+     *
+     * @param array<string, mixed> $daten
+     * @return array<string, mixed>
+     */
+    private function flach(array $daten): array
+    {
+        $werte = [];
+        foreach ($daten as $name => $wert) {
+            if (is_array($wert)) {
+                $werte += $this->flach($wert);
+                continue;
+            }
+            $werte[$name] = $wert;
         }
 
         return $werte;
