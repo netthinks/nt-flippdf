@@ -4,6 +4,18 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.8.3] – 2026-08-21
+
+### Fixed
+
+- **Zooming out again.** Inside the zoom the wheel still asked for the Ctrl key
+  – it had been the only way in there before. Whoever opened the zoom with a
+  plain wheel turn could get closer but not back out. The wheel now works in
+  both directions inside the zoom, without the key; turning back past the
+  smallest step closes it and the book is there again.
+
+---
+
 ## [1.8.2] – 2026-08-21
 
 ### Changed

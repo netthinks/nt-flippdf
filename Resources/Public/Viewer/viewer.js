@@ -1055,9 +1055,18 @@
         el.zoomZu.addEventListener('click', function () { zeige(false); });
         el.zoomEin.addEventListener('click', function () { setzeStufe(stufe + 0.4); });
         el.zoomAus.addEventListener('click', function () { setzeStufe(stufe - 0.4); });
+        /* In der Vergroesserung selbst wirkt das Rad in beide Richtungen, auch
+           ohne Strg: Hier gibt es nichts anderes, wofuer man es braeuchte.
+           Wer ueber die kleinste Stufe hinaus zurueckdreht, ist offenbar
+           fertig - dann schliesst sich die Vergroesserung und das Buch steht
+           wieder da. */
         el.zoom.addEventListener('wheel', function (event) {
-            if (!event.ctrlKey && !event.metaKey) { return; }
             event.preventDefault();
+            if (event.deltaY > 0 && stufe <= 1.0001) {
+                zeige(false);
+
+                return;
+            }
             setzeStufe(stufe + (event.deltaY < 0 ? 0.2 : -0.2));
         }, { passive: false });
 

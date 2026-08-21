@@ -4,6 +4,19 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.8.3] – 2026-08-21
+
+### Behoben
+
+- **Wieder herauszoomen.** In der Vergrößerung verlangte das Rad weiterhin die
+  Strg-Taste – vorher war das dort der einzige Weg hinein. Wer die
+  Vergrößerung mit dem Rad allein geöffnet hatte, kam damit näher heran, aber
+  nicht zurück. Das Rad wirkt jetzt in der Vergrößerung in beide Richtungen,
+  ohne Taste; wer über die kleinste Stufe hinaus zurückdreht, schließt sie und
+  hat das Buch wieder vor sich.
+
+---
+
 ## [1.8.2] – 2026-08-21
 
 ### Geändert
