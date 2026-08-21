@@ -4,6 +4,20 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.8.1] – 2026-08-21
+
+### Hinzugefügt
+
+- **Strg und Mausrad über dem Buch öffnen die Vergrößerung.** Für viele Leser
+  ist das der erste Griff, und ohne uns zoomt der Browser stattdessen die ganze
+  Seite – eingebettet auf einer Landingpage wachsen dann Kopf- und Fußbereich,
+  während das Buch gleich groß bleibt. Die Geste öffnet jetzt die Vergrößerung
+  des Betrachters; wer weiterdreht, vergrößert darin. Zwei Finger auf dem
+  Trackpad melden sich als dasselbe Ereignis und sind damit abgedeckt.
+  Herauszoomen verhält sich unverändert.
+
+---
+
 ## [1.8.0] – 2026-08-21
 
 Erste öffentliche Fassung.

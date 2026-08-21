@@ -4,6 +4,19 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.8.1] – 2026-08-21
+
+### Added
+
+- **Ctrl and the mouse wheel over the book open the zoom.** That gesture is the
+  first reflex for many readers, and without us the browser zooms the whole
+  page instead – embedded on a landing page that means header and footer grow
+  while the book stays as it is. The gesture now opens the viewer's own zoom;
+  turning further scales inside it. Two fingers on a trackpad arrive as the
+  same event and are covered as well. Zooming out keeps working as before.
+
+---
+
 ## [1.8.0] – 2026-08-21
 
 First public release.

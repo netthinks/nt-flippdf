@@ -1060,6 +1060,25 @@
             event.preventDefault();
             setzeStufe(stufe + (event.deltaY < 0 ? 0.2 : -0.2));
         }, { passive: false });
+
+        /* Strg und Mausrad ueber dem Buch: Der erste Griff zum Vergroessern ist
+           bei den meisten nicht die Lupe, sondern genau diese Geste. Ohne uns
+           zoomt der Browser die ganze Seite - eingebettet also Kopf- und
+           Fussbereich der Website, waehrend das Buch gleich gross bleibt.
+           Deshalb fangen wir sie ab und oeffnen die Vergroesserung.
+           Zwei Finger auf dem Trackpad melden sich als dasselbe Ereignis und
+           sind damit ebenfalls abgedeckt. */
+        var buehne = document.querySelector('.stage') || document.body;
+        buehne.addEventListener('wheel', function (event) {
+            if (!event.ctrlKey && !event.metaKey) { return; }
+            if (!el.zoom.hidden) { return; }
+            if (event.deltaY > 0) { return; }
+            event.preventDefault();
+            // Beim Oeffnen nicht zusaetzlich vergroessern: Die Vergroesserung
+            // startet ohnehin bei 1,4 - wer weiter hinein will, dreht einfach
+            // weiter, das Rad wirkt dann in der Vergroesserung selbst.
+            zeige(true);
+        }, { passive: false });
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && !el.zoom.hidden) { zeige(false); }
         });
