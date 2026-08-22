@@ -6,6 +6,27 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.2] – 2026-08-22
+
+### Behoben
+
+- **Ein Klick oder Tipp auf eine Doppelseite machte sie kleiner statt
+  größer.** Die Einstiegsgröße wurde am ersten Blatt gemessen, das die
+  Blätterbibliothek vorhält – bei einer Doppelseite liegt das abgelegt und ohne
+  Breite da. Die Vergrößerung ging deshalb auf ihrer Untergrenze auf, etwa einem
+  Fünftel des Bildschirms. Gemessen wird jetzt das Blatt, das tatsächlich auf
+  der Bühne steht.
+- **Eine Doppelseite lief in der Vergrößerung nach rechts aus dem Bild.** Die
+  Ebene weiß nun, wie viele Seiten sie zeigt, und gibt ihnen den Platz dafür:
+  Die Doppelseite bleibt mittig, und jede Seite ist so groß wie eine einzelne
+  wäre.
+- **Klick und Tipp öffnen jetzt in voller Breite** statt in der Größe, die die
+  Seite auf der Bühne ohnehin schon hatte – zum Lesen greift man schließlich
+  hin. Rad und zwei Finger setzen weiterhin dort an, wo das Buch steht, damit
+  ihr erster Schritt ein Schritt bleibt.
+
+---
+
 ## [1.9.1] – 2026-08-22
 
 ### Behoben

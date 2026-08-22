@@ -1022,16 +1022,15 @@
         var stufe = 1;
         var maximum = typeof book.zoomMax === 'number' ? book.zoomMax : 3;
 
-        function zeige(an) {
+        function zeige(an, art) {
             el.zoom.hidden = !an;
             el.zoomToggle.setAttribute('aria-pressed', String(an));
             if (an) {
                 fuelle();
                 /* Die Groesse laesst sich erst messen, wenn die Vergroesserung
                    sichtbar ist - vorher hat ihr Behaelter keine Breite. */
-                kleinste = vomRad ? stufeWieAufDerBuehne() : 1;
-                setzeStufe(vomRad ? kleinste : 1.4);
-                vomRad = false;
+                kleinste = stufeWieAufDerBuehne();
+                setzeStufe(einstieg(art));
             } else {
                 el.zoomBilder.innerHTML = '';
             }
@@ -1047,13 +1046,38 @@
                 img.alt = beschriftung.page + ' ' + seite.n;
                 el.zoomBilder.appendChild(img);
             });
+            /* Die Breite der Ebene richtet sich nach der Zahl der Seiten: So
+               bleibt eine Doppelseite mittig und jede Seite behaelt bei
+               gleicher Stufe dieselbe Groesse wie eine einzelne. */
+            el.zoomBilder.style.setProperty('--seiten', String(Math.max(1, el.zoomBilder.children.length)));
         }
 
-        // Kleinste Stufe. Sie liegt normalerweise bei 1; oeffnet das Mausrad die
-        // Vergroesserung, wird sie auf die Groesse gesetzt, die das Buch auf der
-        // Buehne gerade hat - sonst waere schon der erste Dreh ein Satz.
+        // Kleinste Stufe: die Groesse, die das Buch auf der Buehne gerade hat.
+        // Wer darunter zurueckdreht, schliesst die Vergroesserung.
         var kleinste = 1;
-        var vomRad = false;
+
+        /**
+         * Mit welcher Stufe die Vergroesserung aufgeht.
+         *
+         * 'buehne' - Rad und Kneifen setzen dort an, wo das Buch steht; der
+         *            Dreh selbst macht daraus den ersten Schritt.
+         * 'lesen'  - Klick und Tipp zeigen die Seiten in voller Breite: gross
+         *            genug zum Lesen und noch ohne Schieben.
+         * sonst    - der Knopf oben, der einen deutlichen Sprung meint.
+         */
+        function einstieg(art) {
+            if (art === 'buehne') {
+                return kleinste;
+            }
+            /* Volle Breite heisst bei einer Doppelseite die halbe Stufe - sonst
+               waere jede der beiden Seiten so breit wie der Bildschirm. */
+            var volleBreite = 1 / Math.max(1, el.zoomBilder.children.length);
+            if (art === 'lesen') {
+                return Math.max(kleinste, volleBreite);
+            }
+
+            return volleBreite * 1.4;
+        }
 
         function setzeStufe(neu) {
             stufe = Math.min(maximum, Math.max(kleinste, neu));
@@ -1068,15 +1092,37 @@
          * dreht, wuerde ohne diese Rechnung von etwa einem Drittel auf volle
          * Breite springen - genau der Satz, der stoert.
          */
+        /* Wie breit eine einzelne Seite gerade auf der Buehne steht. Das Buch
+           haelt mehrere .stf__item vor, darunter abgelegte mit der Breite 0 -
+           es zaehlt also das breiteste, nicht das erste. */
+        function seitenbreiteAufDerBuehne() {
+            var breiteste = 0;
+            document.querySelectorAll('.stf__item').forEach(function (blatt) {
+                var breite = blatt.getBoundingClientRect().width;
+                if (breite > breiteste) {
+                    breiteste = breite;
+                }
+            });
+            if (breiteste > 0) {
+                return breiteste;
+            }
+            /* Kein Blatt gefunden: das Buch selbst, bei einer Doppelseite zur
+               Haelfte. */
+            var buch = el.book ? el.book.getBoundingClientRect().width : 0;
+            var einseitig = !pageFlip || pageFlip.getOrientation() === 'portrait';
+
+            return einseitig ? buch : buch / 2;
+        }
+
         function stufeWieAufDerBuehne() {
-            var seite = document.querySelector('.stf__item') || el.book;
+            var seite = seitenbreiteAufDerBuehne();
             var behaelter = el.zoomBilder.parentElement || el.zoom;
             if (!seite || !behaelter || !behaelter.clientWidth) {
                 return 1;
             }
-            var verhaeltnis = seite.getBoundingClientRect().width / behaelter.clientWidth;
+            var verhaeltnis = seite / behaelter.clientWidth;
 
-            return Math.min(1, Math.max(0.15, verhaeltnis));
+            return Math.min(1.5, Math.max(0.15, verhaeltnis));
         }
 
         el.zoom.addEventListener('seitenwechsel', fuelle);
@@ -1164,8 +1210,7 @@
                bei der Groesse an, die sie ohne Zutun haette, und waechst dann
                mit jeder weiteren Raste. Der Knopf oben bleibt beim
                bisherigen Sprung - ein Klick darauf heisst "deutlich groesser". */
-            vomRad = true;
-            zeige(true);
+            zeige(true, 'buehne');
             setzeStufe(stufe * (1 + schritt(event)));
         }, { passive: false });
         /* Klick mitten auf die Seite vergroessert.
@@ -1203,8 +1248,7 @@
             klickZumZoom = false;
             event.stopPropagation();
             event.preventDefault();
-            vomRad = true;
-            zeige(true);
+            zeige(true, 'lesen');
         }, true);
 
         /* Finger statt Maus.
@@ -1248,8 +1292,7 @@
                     if (verhaeltnis < 1.05) {
                         return;
                     }
-                    vomRad = true;
-                    zeige(true);
+                    zeige(true, 'buehne');
                     kneifStart.stufe = stufe;
                 }
                 setzeStufe(kneifStart.stufe * verhaeltnis);
@@ -1325,8 +1368,7 @@
             if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dauer < 400 && el.zoom.hidden) {
                 event.stopPropagation();
                 if (start.mitte) {
-                    vomRad = true;
-                    zeige(true);
+                    zeige(true, 'lesen');
                 } else if (ende.clientX > (el.book.getBoundingClientRect().left + el.book.getBoundingClientRect().width / 2)) {
                     pageFlip.flipNext();
                 } else {

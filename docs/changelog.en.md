@@ -6,6 +6,24 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.9.2] – 2026-08-22
+
+### Fixed
+
+- **A click or tap on a double page made it smaller instead of larger.** The
+  starting size was read from the first sheet the flip library holds, and on a
+  double page that one is put aside with no width at all — so the zoom opened at
+  its lower limit, about a fifth of the screen. It now measures the sheet
+  actually on the stage.
+- **A double page in the zoom layer ran off to the right.** The layer now knows
+  how many pages it shows and gives them the room they need, so a spread stays
+  centred and each page comes out the same size as a single one would.
+- **A click or tap now opens at full width** instead of the size the page
+  already had on the stage: reading is what the click is for. The wheel and two
+  fingers keep starting where the book stands, so their first step stays a step.
+
+---
+
 ## [1.9.1] – 2026-08-22
 
 ### Fixed

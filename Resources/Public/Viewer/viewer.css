@@ -519,13 +519,15 @@ body {
     display: flex;
     gap: 0;
     align-items: flex-start;
-    width: calc(100% * var(--zoom));
+    /* Eine Doppelseite braucht die doppelte Flaeche, sonst laeuft sie nach
+       rechts aus der Mitte. --seiten setzt der Betrachter beim Fuellen. */
+    width: calc(100% * var(--zoom) * var(--seiten, 1));
     /* Beim Einstieg ueber das Mausrad ist die Seite schmaler als die Flaeche -
        dann gehoert sie in die Mitte und nicht an den linken Rand. */
     margin-inline: auto;
     padding: 0 0 2rem;
 }
-.zoom-images img { width: 100%; height: auto; display: block; }
+.zoom-images img { width: calc(100% / var(--seiten, 1)); height: auto; display: block; }
 
 @media (max-width: 700px) {
     .zoom-images { --zoom: 2; }
