@@ -6,6 +6,32 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.3] – 2026-08-22
+
+### Behoben
+
+- **Strg und Mausrad zoomten die ganze Browserseite.** Beim Herausdrehen
+  schrumpfte alles, nicht nur die Ausgabe – und sobald das Fenster unter 900
+  Pixel fiel, stellte der Betrachter auf Einzelseiten um, die Nachbarseite
+  schien also zu fehlen. Im Betrachter gehört die Geste jetzt dem Betrachter, in
+  beide Richtungen und überall auf der Seite. (Ein bereits eingestellter
+  Browser-Zoom bleibt bestehen; **Strg + 0** setzt ihn zurück, die Doppelseite
+  kommt dann von selbst wieder.)
+
+### Geändert
+
+- **Der Zoom-Knopf öffnet eine Doppelseite ganz**, statt die zweite Seite aus
+  dem Bild zu schieben. Bei einer einzelnen Seite bleibt es beim gewohnten
+  Sprung.
+- **Über die volle Breite hinaus bleibt die Mitte im Bild** – dort steht der
+  Bund –, und die Ansicht lässt sich mit der Maus schieben: Das Rad vergrößert
+  hier, also nimmt man die Seite in die Hand.
+- **Die Knöpfe + und – wirken anteilig** wie das Rad. Ein festes Maß war bei
+  einer Doppelseite, die schon bei einer halben Stufe ganz zu sehen ist, ein
+  Satz.
+
+---
+
 ## [1.9.2] – 2026-08-22
 
 ### Behoben

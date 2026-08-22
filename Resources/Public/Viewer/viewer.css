@@ -529,6 +529,12 @@ body {
 }
 .zoom-images img { width: calc(100% / var(--seiten, 1)); height: auto; display: block; }
 
+/* Groesser als die Flaeche: Die Ansicht laesst sich mit der Maus schieben. */
+.zoom { cursor: grab; }
+.zoom.zieht { cursor: grabbing; }
+.zoom-bar button { cursor: pointer; }
+.zoom-images img { user-select: none; -webkit-user-drag: none; }
+
 @media (max-width: 700px) {
     .zoom-images { --zoom: 2; }
 }

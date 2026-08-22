@@ -1071,17 +1071,29 @@
             }
             /* Volle Breite heisst bei einer Doppelseite die halbe Stufe - sonst
                waere jede der beiden Seiten so breit wie der Bildschirm. */
-            var volleBreite = 1 / Math.max(1, el.zoomBilder.children.length);
+            var seiten = Math.max(1, el.zoomBilder.children.length);
+            var volleBreite = 1 / seiten;
             if (art === 'lesen') {
                 return Math.max(kleinste, volleBreite);
             }
-
-            return volleBreite * 1.4;
+            /* Der Knopf meint einen deutlichen Sprung. Bei einer Doppelseite
+               bleibt es trotzdem bei der vollen Breite: Ein Sprung darueber
+               hinaus schoebe die Nachbarseite aus dem Bild, und der Leser
+               wuesste nicht, dass sie noch da ist. Weiter geht es von Hand. */
+            return seiten > 1 ? volleBreite : 1.4;
         }
 
         function setzeStufe(neu) {
             stufe = Math.min(maximum, Math.max(kleinste, neu));
             el.zoomBilder.style.setProperty('--zoom', String(stufe));
+            /* Ist die Ansicht breiter als die Flaeche, zeigt sie ohne Zutun
+               ihren linken Rand. Beim Blick auf eine Doppelseite gehoert die
+               Mitte ins Bild - dort steht der Bund, und von dort aus schiebt
+               man nach links oder rechts. */
+            var ueberhang = el.zoom.scrollWidth - el.zoom.clientWidth;
+            if (ueberhang > 0) {
+                el.zoom.scrollLeft = ueberhang / 2;
+            }
         }
 
         /**
@@ -1128,8 +1140,32 @@
         el.zoom.addEventListener('seitenwechsel', fuelle);
         el.zoomToggle.addEventListener('click', function () { zeige(el.zoom.hidden); });
         el.zoomZu.addEventListener('click', function () { zeige(false); });
-        el.zoomEin.addEventListener('click', function () { setzeStufe(stufe + 0.4); });
-        el.zoomAus.addEventListener('click', function () { setzeStufe(stufe - 0.4); });
+        /* Anteilig wie am Rad: Ein festes Mass waere bei einer Doppelseite,
+           die schon bei einer halben Stufe ganz zu sehen ist, ein Satz. */
+        el.zoomEin.addEventListener('click', function () { setzeStufe(stufe * 1.3); });
+        el.zoomAus.addEventListener('click', function () { setzeStufe(stufe / 1.3); });
+
+        /* Ziehen mit der Maus schiebt die Ansicht.
+         *
+         * Ist die Ausgabe groesser als die Flaeche, steht die Nachbarseite
+         * neben dem Bild. Das Rad vergroessert hier, es kann also nicht auch
+         * schieben - dafuer nimmt man die Seite in die Hand. */
+        var griff = null;
+        el.zoom.addEventListener('mousedown', function (event) {
+            if (event.button !== 0 || event.target.closest('.zoom-bar')) { return; }
+            griff = { x: event.clientX, y: event.clientY, links: el.zoom.scrollLeft, oben: el.zoom.scrollTop };
+            el.zoom.classList.add('zieht');
+            event.preventDefault();
+        });
+        window.addEventListener('mousemove', function (event) {
+            if (!griff) { return; }
+            el.zoom.scrollLeft = griff.links - (event.clientX - griff.x);
+            el.zoom.scrollTop = griff.oben - (event.clientY - griff.y);
+        });
+        window.addEventListener('mouseup', function () {
+            griff = null;
+            el.zoom.classList.remove('zieht');
+        });
         /* In der Vergroesserung selbst wirkt das Rad in beide Richtungen, auch
            ohne Strg: Hier gibt es nichts anderes, wofuer man es braeuchte.
            Wer ueber die kleinste Stufe hinaus zurueckdreht, ist offenbar
@@ -1142,6 +1178,20 @@
         function schritt(event) {
             return Math.min(0.2, Math.max(0.04, Math.abs(event.deltaY) / 900));
         }
+
+        /* Strg und Rad ist im Browser der Seitenzoom. Im Betrachter gehoert
+           diese Geste uns - und zwar in beide Richtungen und ueberall, auch
+           neben dem Buch. Sonst schrumpft beim Herausdrehen die ganze Seite
+           mitsamt dem Fenster; faellt es dabei unter 900 Pixel, stellt der
+           Betrachter auf Einzelseiten um und die Nachbarseite scheint zu
+           fehlen. Der Betrachter hat eine eigene Seite fuer sich; eingebettet
+           steckt er in einem Rahmen. Die Seite darum herum bleibt also
+           unberuehrt. */
+        document.addEventListener('wheel', function (event) {
+            if (event.ctrlKey || event.metaKey) {
+                event.preventDefault();
+            }
+        }, { capture: true, passive: false });
 
         el.zoom.addEventListener('wheel', function (event) {
             event.preventDefault();

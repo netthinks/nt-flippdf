@@ -4,6 +4,29 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.9.3] – 2026-08-22
+
+### Fixed
+
+- **Ctrl and the wheel zoomed the whole browser page.** Zooming out that way
+  shrank everything, not just the edition — and once the window fell below 900
+  pixels, the viewer switched to single pages, so the neighbouring page seemed
+  to have gone. Inside the viewer the gesture now belongs to the viewer, in both
+  directions and everywhere on the page. (A browser page zoom already set stays
+  in place; **Ctrl + 0** puts it back, and the spread returns by itself.)
+
+### Changed
+
+- **The zoom button opens a double page whole**, instead of pushing the second
+  page out of view. A single page still gets the familiar jump.
+- **Beyond full width the view stays centred** on the gutter, and it can be
+  pushed around with the mouse — the wheel zooms here, so dragging does the
+  moving.
+- **The + and – buttons work proportionally**, like the wheel. A fixed amount
+  was a leap on a double page, which is fully visible at half a level already.
+
+---
+
 ## [1.9.2] – 2026-08-22
 
 ### Fixed
