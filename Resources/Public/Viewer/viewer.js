@@ -1265,6 +1265,17 @@
         kneifen(el.book);
         kneifen(el.zoom);
 
+        /* Safari auf dem iPad kennt eigene Zwei-Finger-Ereignisse und zoomt
+           damit die ganze Seite - im eingebetteten Betrachter laeuft dann das
+           Fenster aus dem Bild und laesst sich verschieben. Da wir das
+           Aufziehen selbst auswerten, wird die Geste des Browsers hier
+           abgewiesen. */
+        ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (art) {
+            document.addEventListener(art, function (event) {
+                event.preventDefault();
+            }, { passive: false });
+        });
+
         el.book.addEventListener('touchstart', function (event) {
             if (event.touches.length !== 1) {
                 return;
@@ -1279,6 +1290,18 @@
             // sonst haengt die Seite am Finger und das Wischen geht verloren.
             event.stopPropagation();
         }, { capture: true, passive: true });
+
+        el.book.addEventListener('touchmove', function (event) {
+            if (tippStart === null || event.touches.length !== 1) {
+                return;
+            }
+            var dx = Math.abs(event.touches[0].clientX - tippStart.x);
+            var dy = Math.abs(event.touches[0].clientY - tippStart.y);
+            // Waagerecht: gehoert uns. Senkrecht: gehoert der Seite darunter.
+            if (dx > dy && dx > 8 && event.cancelable) {
+                event.preventDefault();
+            }
+        }, { capture: true, passive: false });
 
         el.book.addEventListener('touchend', function (event) {
             if (tippStart === null || kneifStart !== null || event.changedTouches.length !== 1) {

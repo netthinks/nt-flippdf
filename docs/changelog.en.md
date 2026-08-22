@@ -6,6 +6,19 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.9.1] – 2026-08-22
+
+### Fixed
+
+- **On an iPad the whole window slid out of view.** Safari treats two fingers as
+  a page zoom of its own; with the viewer doing the same thing at the same time,
+  the page ended up zoomed and could be pushed around. Safari's gesture is now
+  turned down — the viewer scales the pages instead. Horizontal swipes are
+  claimed by the viewer as well, vertical ones stay with the page underneath,
+  and nothing can drift sideways any more.
+
+---
+
 ## [1.9.0] – 2026-08-22
 
 ### Added

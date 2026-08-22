@@ -17,6 +17,11 @@ html, body {
     background: var(--stage);
     color: #e9e9e9;
     font-family: "Helvetica Neue", Arial, sans-serif;
+    /* Auf dem Tablet darf nichts seitlich wegrutschen: Der Betrachter fuellt
+       das Fenster, gescrollt wird hoechstens innerhalb seiner Flaechen. */
+    overscroll-behavior: none;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -148,6 +153,10 @@ body {
    einmal die Bühne übersteigt. */
 .stage {
     overflow: hidden;
+    /* Waagerechte Bewegungen wertet der Betrachter selbst aus (Wischen,
+       Aufziehen); senkrechte bleiben beim Browser, damit die Seite, in der die
+       Ausgabe steckt, weiter scrollt. */
+    touch-action: pan-y;
     position: relative;
     display: flex;
     align-items: center;

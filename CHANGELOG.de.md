@@ -4,6 +4,20 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.1] – 2026-08-22
+
+### Behoben
+
+- **Auf dem iPad lief das ganze Fenster aus dem Bild.** Safari deutet zwei
+  Finger als eigenen Seitenzoom; weil der Betrachter dasselbe gleichzeitig tat,
+  war am Ende die Seite vergrößert und ließ sich hin und her schieben. Die
+  Geste des Browsers wird jetzt abgewiesen — vergrößert wird die Seite im
+  Betrachter. Waagerechtes Wischen nimmt der Betrachter ebenfalls für sich,
+  senkrechtes bleibt bei der Seite darunter, und seitlich verrutschen kann
+  nichts mehr.
+
+---
+
 ## [1.9.0] – 2026-08-22
 
 ### Hinzugefügt
