@@ -4,6 +4,19 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.9.4] – 2026-08-22
+
+### Added
+
+- **A word at the first and the last page.** Whoever keeps turning where the
+  edition ends used to get nothing at all and could not tell whether this was
+  the end or a viewer that had stopped working. A short message now appears at
+  the outer edge — through every door: the buttons, the arrow keys, a click on
+  the outer margin and a swipe on a touch screen. It shows once and fades on its
+  own; turning again does not stack up messages.
+
+---
+
 ## [1.9.3] – 2026-08-22
 
 ### Fixed

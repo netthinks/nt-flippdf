@@ -843,8 +843,8 @@
     }
 
     function bindControls() {
-        if (el.prev) { el.prev.addEventListener('click', function () { pageFlip.flipPrev(); }); }
-        if (el.next) { el.next.addEventListener('click', function () { pageFlip.flipNext(); }); }
+        if (el.prev) { el.prev.addEventListener('click', function () { zurueck(); }); }
+        if (el.next) { el.next.addEventListener('click', function () { weiter(); }); }
         if (el.slider) {
             el.slider.addEventListener('input', function () { goTo(parseInt(el.slider.value, 10)); });
         }
@@ -883,8 +883,8 @@
 
         document.addEventListener('keydown', function (event) {
             if (event.target === el.search) { return; }
-            if (event.key === 'ArrowLeft') { pageFlip.flipPrev(); }
-            if (event.key === 'ArrowRight') { pageFlip.flipNext(); }
+            if (event.key === 'ArrowLeft') { zurueck(); }
+            if (event.key === 'ArrowRight') { weiter(); }
             if (event.key === 'Home') { goTo(1); }
             if (event.key === 'End') { goTo(book.pageCount); }
         });
@@ -1222,25 +1222,13 @@
          * Zwei Finger auf dem Trackpad melden sich als Rad mit ctrlKey und
          * sind damit in beiden Faellen abgedeckt. */
         var buehne = document.querySelector('.stage') || document.body;
-        var hinweisOffen = false;
 
         function frei() {
             return window.self === window.top || document.fullscreenElement !== null;
         }
 
         function radHinweis() {
-            if (hinweisOffen || !buehne) { return; }
-            var text = label('wheelHint');
-            if (!text || text === 'wheelHint') { return; }
-            var fahne = document.createElement('div');
-            fahne.className = 'rad-hinweis';
-            fahne.textContent = text;
-            buehne.appendChild(fahne);
-            hinweisOffen = true;
-            window.setTimeout(function () {
-                fahne.classList.add('weg');
-                window.setTimeout(function () { fahne.remove(); hinweisOffen = false; }, 400);
-            }, 1600);
+            meldung('wheelHint');
         }
 
         buehne.addEventListener('wheel', function (event) {
@@ -1291,8 +1279,28 @@
                 event.stopPropagation();
             }
         }, true);
+        /* Der Klick an den Aussenrand blaettert - das macht die Bibliothek
+           selbst. Am Anschlag tut sie nichts, und niemand erfaehrt warum.
+           Also hoeren wir mit und sagen es. */
+        function anschlag(event) {
+            /* Nach der Seite gerechnet, nicht nach dem Buch: Die erste und die
+               letzte Seite stehen allein und nur in einer Haelfte - gemessen am
+               Buch laege ein Klick auf die erste Seite rechts von dessen Mitte
+               und meinte damit das Gegenteil. */
+            var seite = event.target.closest ? event.target.closest('.stf__item') : null;
+            var kasten = (seite || el.book).getBoundingClientRect();
+            if (!kasten.width) { return; }
+            if (event.clientX >= kasten.left + kasten.width / 2) {
+                if (amEnde()) { meldung('endHint', 'rechts'); }
+            } else if (amAnfang()) {
+                meldung('startHint', 'links');
+            }
+        }
+
         el.book.addEventListener('click', function (event) {
             if (!klickZumZoom) {
+                if (el.zoom.hidden) { anschlag(event); }
+
                 return;
             }
             klickZumZoom = false;
@@ -1411,7 +1419,7 @@
 
             if (Math.abs(dx) >= 40 && Math.abs(dy) <= 80 && dauer < 1200) {
                 event.stopPropagation();
-                if (dx > 0) { pageFlip.flipPrev(); } else { pageFlip.flipNext(); }
+                if (dx > 0) { zurueck(); } else { weiter(); }
 
                 return;
             }
@@ -1420,9 +1428,9 @@
                 if (start.mitte) {
                     zeige(true, 'lesen');
                 } else if (ende.clientX > (el.book.getBoundingClientRect().left + el.book.getBoundingClientRect().width / 2)) {
-                    pageFlip.flipNext();
+                    weiter();
                 } else {
-                    pageFlip.flipPrev();
+                    zurueck();
                 }
             }
         }, { capture: true, passive: true });
@@ -1435,6 +1443,66 @@
     /**
      * Die Seiten, die gerade zu sehen sind - im Querformat zwei, sonst eine.
      */
+    /**
+     * Zeigt kurz eine Meldung ueber dem Buch.
+     *
+     * Immer nur eine: Wer mehrfach gegen dieselbe Schranke blaettert, soll
+     * keinen Stapel Meldungen bekommen. Die Seite heisst 'links' oder
+     * 'rechts' - die Meldung erscheint dort, wo geklickt wurde.
+     */
+    var fahneOffen = false;
+
+    function meldung(schluessel, seite) {
+        var buehne = document.querySelector('.stage');
+        var text = label(schluessel);
+        if (fahneOffen || !buehne || !text || text === schluessel) { return; }
+        var fahne = document.createElement('div');
+        fahne.className = 'rad-hinweis' + (seite ? ' am-rand ' + seite : '');
+        fahne.textContent = text;
+        buehne.appendChild(fahne);
+        fahneOffen = true;
+        window.setTimeout(function () {
+            fahne.classList.add('weg');
+            window.setTimeout(function () { fahne.remove(); fahneOffen = false; }, 400);
+        }, 1600);
+    }
+
+    /**
+     * Blaettern mit Anschlag.
+     *
+     * Am Ende der Ausgabe geschieht sonst schlicht nichts, und der Leser
+     * weiss nicht, ob er das Ende erreicht hat oder ob der Betrachter klemmt.
+     * Beides geht durch dieselbe Tuer: Knoepfe, Pfeiltasten, Klick an den
+     * Aussenrand und Wischen.
+     */
+    function amEnde() {
+        var gezeigt = aktuelleSeiten();
+
+        return gezeigt[gezeigt.length - 1] >= book.pageCount;
+    }
+
+    function amAnfang() {
+        return aktuelleSeiten()[0] <= 1;
+    }
+
+    function weiter() {
+        if (amEnde()) {
+            meldung('endHint', 'rechts');
+
+            return;
+        }
+        pageFlip.flipNext();
+    }
+
+    function zurueck() {
+        if (amAnfang()) {
+            meldung('startHint', 'links');
+
+            return;
+        }
+        pageFlip.flipPrev();
+    }
+
     function aktuelleSeiten() {
         var nummer = pageFlip ? pageFlip.getCurrentPageIndex() + 1 : 1;
         if (!pageFlip || pageFlip.getOrientation() === 'portrait') {

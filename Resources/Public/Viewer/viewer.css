@@ -564,3 +564,18 @@ body {
     transition: opacity .35s ease-out;
 }
 .rad-hinweis.weg { opacity: 0; }
+
+/* Der Anschlag am Anfang und am Ende meldet sich dort, wo geklickt wurde:
+   an der Aussenkante, auf halber Hoehe der Seite. */
+.rad-hinweis.am-rand { top: 50%; }
+.rad-hinweis.am-rand.links { left: 4.5rem; transform: translateY(-50%); }
+.rad-hinweis.am-rand.rechts { left: auto; right: 4.5rem; transform: translateY(-50%); }
+
+@media (max-width: 700px) {
+    .rad-hinweis.am-rand.links,
+    .rad-hinweis.am-rand.rechts {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+    }
+}

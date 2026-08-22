@@ -46,6 +46,9 @@ Volltextsuche; Inhaltsverzeichnis; Seitenübersicht; Vergrößern; Drucken;
 Download; Vollbild; Öffnen im eigenen Fenster; ein Blättergeräusch; und einen
 Umschalter zwischen verknüpften Sprachfassungen.
 
+**Am Anfang und am Ende** sagt der Betrachter kurz Bescheid, wenn jemand
+weiterzublättern versucht – sonst geschähe dort schlicht nichts.
+
 **Näher heran** kommt man mit einem Klick mitten auf die Seite, mit dem Mausrad,
 mit zwei Fingern auf dem Tablet oder über die Schaltfläche. Klicks nahe an den
 Außenrändern blättern weiter — dort greift man hin, um umzublättern.

@@ -43,6 +43,9 @@ full-text search; table of contents; page overview; zoom; print; download; full
 screen; opening in its own window; a page-turn sound; and a switch between
 linked language editions.
 
+**At the first and the last page** the viewer says so briefly when someone
+tries to turn further — otherwise nothing at all would happen there.
+
 **Getting closer** takes a click in the middle of a page, the wheel, two fingers
 on a touch screen, or the button. Clicks near the outer edges keep flipping —
 that is where one reaches to turn a page.

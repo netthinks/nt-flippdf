@@ -4,6 +4,20 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.4] – 2026-08-22
+
+### Neu
+
+- **Ein Wort an der ersten und der letzten Seite.** Wer dort weiterblättert, wo
+  die Ausgabe endet, bekam bisher gar nichts zu sehen und konnte nicht
+  unterscheiden, ob das Ende erreicht ist oder der Betrachter klemmt. Jetzt
+  erscheint am äußeren Rand kurz ein Hinweis – auf allen Wegen: Knöpfe,
+  Pfeiltasten, Klick an den Außenrand und Wischen auf dem Tablet. Er zeigt sich
+  einmal und geht von selbst wieder; mehrfaches Blättern stapelt keine
+  Meldungen.
+
+---
+
 ## [1.9.3] – 2026-08-22
 
 ### Behoben
