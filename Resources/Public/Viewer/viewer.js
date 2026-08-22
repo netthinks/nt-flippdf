@@ -1026,6 +1026,7 @@
             el.zoom.hidden = !an;
             el.zoomToggle.setAttribute('aria-pressed', String(an));
             if (an) {
+                strgGesagt = false;
                 fuelle();
                 /* Die Groesse laesst sich erst messen, wenn die Vergroesserung
                    sichtbar ist - vorher hat ihr Behaelter keine Breite. */
@@ -1193,7 +1194,25 @@
             }
         }, { capture: true, passive: false });
 
+        /* Der Hinweis auf die Strg-Taste in der Vergroesserung: einmal je
+           Aufenthalt, nicht bei jedem Dreh. */
+        var strgGesagt = false;
+
         el.zoom.addEventListener('wheel', function (event) {
+            var mitTaste = event.ctrlKey || event.metaKey;
+            /* Ist die Seite groesser als die Flaeche, liest man mit dem Rad -
+               es waere sonst der einzige Weg nach unten verstellt. Zum
+               Vergroessern kommt dann die Strg-Taste dazu, wie auf der Buehne
+               auch. Passt die Seite ganz ins Bild, gibt es nichts zu scrollen:
+               Dann vergroessert das Rad allein, und ein Dreh zurueck schliesst. */
+            if (!mitTaste && el.zoom.scrollHeight > el.zoom.clientHeight + 1) {
+                if (!strgGesagt) {
+                    strgGesagt = true;
+                    meldung('wheelHint');
+                }
+
+                return;
+            }
             event.preventDefault();
             if (event.deltaY > 0 && stufe <= kleinste + 0.0001) {
                 zeige(false);
@@ -1453,13 +1472,16 @@
     var fahneOffen = false;
 
     function meldung(schluessel, seite) {
-        var buehne = document.querySelector('.stage');
+        /* Ist die Vergroesserung offen, liegt sie ueber der Buehne - die
+           Meldung gehoert dann hinein, sonst stuende sie dahinter. */
+        var offen = el.zoom && !el.zoom.hidden;
+        var behaelter = offen ? el.zoom : document.querySelector('.stage');
         var text = label(schluessel);
-        if (fahneOffen || !buehne || !text || text === schluessel) { return; }
+        if (fahneOffen || !behaelter || !text || text === schluessel) { return; }
         var fahne = document.createElement('div');
-        fahne.className = 'rad-hinweis' + (seite ? ' am-rand ' + seite : '');
+        fahne.className = 'rad-hinweis' + (offen ? ' im-zoom' : '') + (seite ? ' am-rand ' + seite : '');
         fahne.textContent = text;
-        buehne.appendChild(fahne);
+        behaelter.appendChild(fahne);
         fahneOffen = true;
         window.setTimeout(function () {
             fahne.classList.add('weg');

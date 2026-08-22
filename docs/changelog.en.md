@@ -6,6 +6,19 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.9.7] – 2026-08-22
+
+### Changed
+
+- **In the zoom the wheel reads, Ctrl and the wheel zoom.** As soon as the page
+  is taller than the screen, the wheel scrolls it — the only way down was
+  blocked before, because the wheel zoomed there without the key. When the page
+  fits entirely, there is nothing to scroll: then the wheel alone zooms as
+  before, and one turn back closes the zoom. The hint about the Ctrl key now
+  appears in the zoom as well, once per visit.
+
+---
+
 ## [1.9.6] – 2026-08-22
 
 ### Fixed

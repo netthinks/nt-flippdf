@@ -570,6 +570,13 @@ body {
 }
 .rad-hinweis.weg { opacity: 0; }
 
+/* In der Vergroesserung schwebt die Meldung ueber allem und bleibt beim
+   Scrollen stehen. */
+.rad-hinweis.im-zoom {
+    position: fixed;
+    z-index: 45;
+}
+
 /* Der Anschlag am Anfang und am Ende meldet sich dort, wo geklickt wurde:
    an der Aussenkante, auf halber Hoehe der Seite. */
 .rad-hinweis.am-rand { top: 50%; }

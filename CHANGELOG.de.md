@@ -4,6 +4,20 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.7] – 2026-08-22
+
+### Geändert
+
+- **In der Vergrößerung liest das Rad, Strg und Rad vergrößern.** Sobald die
+  Seite höher ist als der Bildschirm, scrollt das Rad sie – bisher war der
+  einzige Weg nach unten verstellt, weil das Rad dort auch ohne Taste
+  vergrößerte. Passt die Seite ganz ins Bild, gibt es nichts zu scrollen: Dann
+  vergrößert das Rad allein wie bisher, und ein Dreh zurück schließt die
+  Vergrößerung. Der Hinweis auf die Strg-Taste erscheint jetzt auch dort, einmal
+  je Aufenthalt.
+
+---
+
 ## [1.9.6] – 2026-08-22
 
 ### Behoben
