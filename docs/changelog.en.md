@@ -6,6 +6,23 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.9.0] – 2026-08-22
+
+### Added
+
+- **A click in the middle of a page opens the zoom.** That is the reflex most
+  readers have, and it was the one thing the viewer did not answer. Clicks near
+  the outer edges keep flipping — that is where one reaches to turn a page.
+- **Swiping works on a tablet.** The flip library only counts a swipe if it is
+  over within 250 milliseconds; a comfortable swipe on an iPad takes longer, and
+  the page simply stayed put. Touches are now taken up by the viewer itself: a
+  swipe flips, a tap in the middle zooms, a tap near an edge flips. Vertical
+  swipes are left alone so the page underneath keeps scrolling.
+- **Two fingers open the zoom** and scale it, on the page as well as inside the
+  zoom.
+
+---
+
 ## [1.8.5] – 2026-08-21
 
 ### Fixed

@@ -41,10 +41,14 @@ in drei Jahren vielleicht nicht mehr gibt.
 ## Was der Betrachter anbietet
 
 Blättern mit den Pfeiltasten, den Schaltflächen, durch Ziehen an der Seitenecke
-oder Wischen; Seitenregler mit Kapitelmarken; Volltextsuche;
-Inhaltsverzeichnis; Seitenübersicht; Vergrößern; Drucken; Download; Vollbild;
-Öffnen im eigenen Fenster; ein Blättergeräusch; und einen Umschalter zwischen
-verknüpften Sprachfassungen.
+mit der Maus oder Wischen auf dem Tablet; Seitenregler mit Kapitelmarken;
+Volltextsuche; Inhaltsverzeichnis; Seitenübersicht; Vergrößern; Drucken;
+Download; Vollbild; Öffnen im eigenen Fenster; ein Blättergeräusch; und einen
+Umschalter zwischen verknüpften Sprachfassungen.
+
+**Näher heran** kommt man mit einem Klick mitten auf die Seite, mit dem Mausrad,
+mit zwei Fingern auf dem Tablet oder über die Schaltfläche. Klicks nahe an den
+Außenrändern blättern weiter — dort greift man hin, um umzublättern.
 
 **Jedes davon lässt sich abschalten** — als Vorgabe in der
 Erweiterungskonfiguration, je Ausgabe im Backend-Modul und je Inhaltselement.

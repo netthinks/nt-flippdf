@@ -4,6 +4,25 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.0] – 2026-08-22
+
+### Hinzugefügt
+
+- **Ein Klick mitten auf die Seite öffnet die Vergrößerung.** Das ist der Reflex
+  der meisten Leser, und es war das Einzige, worauf der Betrachter keine Antwort
+  hatte. Klicks nahe an den Außenrändern blättern weiter — dort greift man hin,
+  um umzublättern.
+- **Wischen funktioniert auf dem Tablet.** Die Blätter-Bibliothek erkennt ein
+  Wischen nur, wenn es in 250 Millisekunden vorbei ist; ein bequemes Wischen auf
+  dem iPad dauert länger, und die Seite blieb einfach stehen. Die Berührungen
+  nimmt jetzt der Betrachter selbst entgegen: Wischen blättert, Tippen in die
+  Mitte vergrößert, Tippen am Rand blättert. Senkrechtes Wischen bleibt
+  unangetastet, damit die Seite darunter weiter scrollt.
+- **Zwei Finger ziehen die Seite auf** und verkleinern sie wieder — auf der
+  Seite wie in der Vergrößerung.
+
+---
+
 ## [1.8.5] – 2026-08-21
 
 ### Behoben

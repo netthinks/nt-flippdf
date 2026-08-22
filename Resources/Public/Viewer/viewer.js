@@ -1168,6 +1168,150 @@
             zeige(true);
             setzeStufe(stufe * (1 + schritt(event)));
         }, { passive: false });
+        /* Klick mitten auf die Seite vergroessert.
+         *
+         * Der erste Griff vieler Leser: hineinklicken, um lesen zu koennen.
+         * Die Aussenraender bleiben dem Blaettern vorbehalten - dort zieht man
+         * die Seitenecke um, und genau dort wird auch geklickt, wenn man
+         * weiterblaettern will. */
+        function inDerMitte(event) {
+            var seite = event.target.closest ? event.target.closest('.stf__item') : null;
+            if (!seite) {
+                return false;
+            }
+            var kasten = seite.getBoundingClientRect();
+            if (!kasten.width) {
+                return false;
+            }
+            var anteil = (event.clientX - kasten.left) / kasten.width;
+
+            return anteil > 0.2 && anteil < 0.8;
+        }
+
+        var klickZumZoom = false;
+        el.book.addEventListener('mousedown', function (event) {
+            klickZumZoom = event.button === 0 && el.zoom.hidden && inDerMitte(event);
+            if (klickZumZoom) {
+                // Die Bibliothek soll aus dem Klick kein Umblaettern machen.
+                event.stopPropagation();
+            }
+        }, true);
+        el.book.addEventListener('click', function (event) {
+            if (!klickZumZoom) {
+                return;
+            }
+            klickZumZoom = false;
+            event.stopPropagation();
+            event.preventDefault();
+            vomRad = true;
+            zeige(true);
+        }, true);
+
+        /* Finger statt Maus.
+         *
+         * Die Bibliothek erkennt ein Wischen nur, wenn es in 250 Millisekunden
+         * vorbei ist - auf einem Tablet ist das zu knapp, dort bleibt die
+         * Seite einfach stehen. Deshalb nehmen wir die Beruehrungen selbst
+         * entgegen: einmal Wischen blaettert, Tippen in der Mitte vergroessert,
+         * und zwei Finger ziehen die Seite auf. Senkrechtes Wischen bleibt
+         * unangetastet, damit die Seite darunter weiter scrollt. */
+        var tippStart = null;
+        var kneifStart = null;
+
+        function fingerAbstand(beruehrungen) {
+            var dx = beruehrungen[0].clientX - beruehrungen[1].clientX;
+            var dy = beruehrungen[0].clientY - beruehrungen[1].clientY;
+
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function kneifen(flaeche) {
+            flaeche.addEventListener('touchstart', function (event) {
+                if (event.touches.length !== 2) {
+                    return;
+                }
+                kneifStart = {
+                    abstand: fingerAbstand(event.touches),
+                    stufe: el.zoom.hidden ? null : stufe,
+                };
+                event.stopPropagation();
+            }, { capture: true, passive: true });
+
+            flaeche.addEventListener('touchmove', function (event) {
+                if (event.touches.length !== 2 || kneifStart === null) {
+                    return;
+                }
+                event.preventDefault();
+                event.stopPropagation();
+                var verhaeltnis = fingerAbstand(event.touches) / kneifStart.abstand;
+                if (kneifStart.stufe === null) {
+                    if (verhaeltnis < 1.05) {
+                        return;
+                    }
+                    vomRad = true;
+                    zeige(true);
+                    kneifStart.stufe = stufe;
+                }
+                setzeStufe(kneifStart.stufe * verhaeltnis);
+            }, { capture: true, passive: false });
+
+            flaeche.addEventListener('touchend', function (event) {
+                if (event.touches.length < 2) {
+                    kneifStart = null;
+                }
+            }, { capture: true, passive: true });
+        }
+
+        kneifen(el.book);
+        kneifen(el.zoom);
+
+        el.book.addEventListener('touchstart', function (event) {
+            if (event.touches.length !== 1) {
+                return;
+            }
+            tippStart = {
+                x: event.touches[0].clientX,
+                y: event.touches[0].clientY,
+                zeit: Date.now(),
+                mitte: inDerMitte(event.touches[0]),
+            };
+            // Die Bibliothek soll die Beruehrung nicht als Ziehen aufnehmen -
+            // sonst haengt die Seite am Finger und das Wischen geht verloren.
+            event.stopPropagation();
+        }, { capture: true, passive: true });
+
+        el.book.addEventListener('touchend', function (event) {
+            if (tippStart === null || kneifStart !== null || event.changedTouches.length !== 1) {
+                tippStart = null;
+
+                return;
+            }
+            var ende = event.changedTouches[0];
+            var dx = ende.clientX - tippStart.x;
+            var dy = ende.clientY - tippStart.y;
+            var dauer = Date.now() - tippStart.zeit;
+            var start = tippStart;
+            tippStart = null;
+
+            if (Math.abs(dx) >= 40 && Math.abs(dy) <= 80 && dauer < 1200) {
+                event.stopPropagation();
+                if (dx > 0) { pageFlip.flipPrev(); } else { pageFlip.flipNext(); }
+
+                return;
+            }
+            if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dauer < 400 && el.zoom.hidden) {
+                event.stopPropagation();
+                if (start.mitte) {
+                    vomRad = true;
+                    zeige(true);
+                } else if (ende.clientX > (el.book.getBoundingClientRect().left + el.book.getBoundingClientRect().width / 2)) {
+                    pageFlip.flipNext();
+                } else {
+                    pageFlip.flipPrev();
+                }
+            }
+        }, { capture: true, passive: true });
+
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && !el.zoom.hidden) { zeige(false); }
         });

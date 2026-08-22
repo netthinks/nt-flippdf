@@ -74,10 +74,15 @@ page module shows a preview with the cover and the details of the edition.
 
 ![The viewer with an edition open](Images/betrachter-doppelseite.webp)
 
-Page flipping with the arrow keys, the buttons, by dragging a corner or by
-swiping; a page slider with chapter marks; full-text search; table of contents;
-page overview; zoom; print; download; full screen; opening in its own window; a
-page-turn sound; and a switch between linked language editions.
+Page flipping with the arrow keys, the buttons, by dragging a corner with the
+mouse or by swiping on a touch screen; a page slider with chapter marks;
+full-text search; table of contents; page overview; zoom; print; download; full
+screen; opening in its own window; a page-turn sound; and a switch between
+linked language editions.
+
+**Getting closer** takes a click in the middle of a page, the wheel, two fingers
+on a touch screen, or the button. Clicks near the outer edges keep flipping —
+that is where one reaches to turn a page.
 
 **Every one of these can be switched off** – as a default in the extension
 configuration, per edition in the backend module, and per content element. The
