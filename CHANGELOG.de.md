@@ -4,6 +4,18 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.5] – 2026-08-22
+
+### Behoben
+
+- **Beim Erneuern ging verloren, was das Zusatzpaket beisteuert.**
+  `flippdf:refresh` schrieb die `book.json`, bevor es die Erweiterungspunkte
+  fragte – beim Bauen ist es umgekehrt. Französische und chinesische Ausgaben
+  fielen dadurch bei jedem Erneuern auf englische Beschriftungen zurück. Jetzt
+  gilt an beiden Stellen dieselbe Reihenfolge.
+
+---
+
 ## [1.9.4] – 2026-08-22
 
 ### Neu

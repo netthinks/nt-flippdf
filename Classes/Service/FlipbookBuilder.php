@@ -388,14 +388,19 @@ class FlipbookBuilder
         // Neuer Stand: Er haengt an den Adressen der Betrachter-Dateien, sonst
         // liefe der Browser weiter mit der alten Fassung.
         $book['built'] = time();
+        /* Erst fragen, dann schreiben - wie beim Bauen. Sonst stuende in der
+           Datei der Stand vor dem Ereignis, und was das Zusatzpaket beisteuert
+           (etwa franzoesische und chinesische Beschriftungen) waere nach jedem
+           Erneuern wieder fort. */
+        $book = $this->eventDispatcher
+            ->dispatch(new BeforeBookWrittenEvent($book, [], $target))
+            ->getBuch();
+
         file_put_contents(
             $bookFile,
             json_encode($book, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
         );
 
-        $book = $this->eventDispatcher
-            ->dispatch(new BeforeBookWrittenEvent($book, [], $target))
-            ->getBuch();
         $this->copyAssets($target . '/assets');
         $this->writeIndex($target, $book);
         $this->protectFromIndexing();

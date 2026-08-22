@@ -4,6 +4,18 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.9.5] – 2026-08-22
+
+### Fixed
+
+- **Refreshing an edition threw away what the add-on package contributes.**
+  `flippdf:refresh` wrote `book.json` before asking the extension points, not
+  after — the build does it the other way round. French and Chinese editions
+  therefore fell back to English labels with every refresh. Now the same order
+  applies in both places.
+
+---
+
 ## [1.9.4] – 2026-08-22
 
 ### Added
