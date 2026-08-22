@@ -4,6 +4,17 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.9.6] – 2026-08-22
+
+### Fixed
+
+- **The zoom buttons wandered off to the left.** Plus, minus and close were
+  pinned to the top of the layer but not to its side, so as soon as the view
+  grew wider than the screen they slid away with the content. They now stay in
+  the top right corner at every level and in every scroll position.
+
+---
+
 ## [1.9.5] – 2026-08-22
 
 ### Fixed

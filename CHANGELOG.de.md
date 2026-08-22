@@ -4,6 +4,17 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.9.6] – 2026-08-22
+
+### Behoben
+
+- **Die Zoom-Knöpfe wanderten nach links.** Plus, Minus und Schließen waren am
+  oberen Rand der Ebene angeheftet, aber nicht an der Seite – sobald die Ansicht
+  breiter wurde als der Bildschirm, schoben sie sich mit dem Inhalt davon. Sie
+  bleiben jetzt in jeder Zoomstufe und Scrollposition oben rechts stehen.
+
+---
+
 ## [1.9.5] – 2026-08-22
 
 ### Behoben

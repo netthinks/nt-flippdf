@@ -495,8 +495,13 @@ body {
     overscroll-behavior: contain;
 }
 .zoom-bar {
+    /* In beide Richtungen angeheftet: Ist die Ausgabe breiter als die
+       Flaeche, schiebt sich der Inhalt darunter hinweg - die Knoepfe bleiben
+       oben rechts stehen, wo man sie sucht. */
     position: sticky;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 2;
     display: flex;
     justify-content: flex-end;
