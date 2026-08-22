@@ -64,6 +64,7 @@ class ManagerController
         return match ($aktion) {
             'bauen' => $this->bauen($parsed),
             'erneuern' => $this->erneuern((string)($query['kennung'] ?? '')),
+            'alleErneuern' => $this->alleErneuern(),
             'neubauen' => $this->neubauen((string)($query['kennung'] ?? '')),
             'loeschen' => $this->loeschen((string)($query['kennung'] ?? '')),
             'bearbeiten' => $this->bearbeiten($request, (string)($query['kennung'] ?? '')),
@@ -86,6 +87,8 @@ class ManagerController
         $view->assignMultiple([
             'ausgaben' => $ausgaben,
             'spalten' => $spalten,
+            // Wie viele Ausgaben noch mit einem aelteren Betrachter laufen
+            'nachzuziehen' => count(array_filter($ausgaben, static fn(array $a): bool => $a['betrachterAlt'])),
             'zusatzfelder' => $this->eventDispatcher
                 ->dispatch(new ModuleFormEvent('bauen'))
                 ->getAbschnitte(),
@@ -157,6 +160,28 @@ class ManagerController
         } else {
             $this->melden($this->text('msg.unknown', [$kennung]), ContextualFeedbackSeverity::ERROR);
         }
+
+        return $this->zurueck();
+    }
+
+    /**
+     * Erneuert den Betrachter aller Ausgaben auf einmal.
+     *
+     * Der Weg nach einem Update der Extension: Die Seitenbilder bleiben, nur
+     * Betrachter und Angaben werden neu geschrieben - das dauert Sekunden.
+     */
+    private function alleErneuern(): ResponseInterface
+    {
+        $erneuert = 0;
+        foreach ($this->builder->listIssues() as $kennung) {
+            if ($this->builder->refreshViewer($kennung)) {
+                $erneuert++;
+            }
+        }
+        $this->melden(
+            $this->text('msg.refreshAll.ok', [$erneuert]),
+            $erneuert > 0 ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::INFO
+        );
 
         return $this->zurueck();
     }
@@ -344,6 +369,8 @@ class ManagerController
     private function ausgabenMitAngaben(): array
     {
         $ausgaben = [];
+        $stand = $this->builder->viewerVersion();
+        $zeichen = $this->builder->viewerHash();
         foreach ($this->builder->listIssues() as $kennung) {
             $book = $this->builder->readBook($kennung);
             if ($book === null) {
@@ -369,6 +396,11 @@ class ManagerController
                 'inhalt' => count((array)($book['toc'] ?? [])),
                 'download' => (string)($book['downloadUrl'] ?? ''),
                 'gebaut' => is_file($pfad . '/book.json') ? filemtime($pfad . '/book.json') : 0,
+                // Der Betrachter liegt als Kopie in der Ausgabe: Nach einem
+                // Update der Extension ist er dort erst nach dem Erneuern.
+                'betrachterAlt' => ($stand !== '' && (string)($book['viewer'] ?? '') !== $stand)
+                    || (string)($book['viewerHash'] ?? '') !== $zeichen,
+                'betrachterStand' => (string)($book['viewer'] ?? ''),
                 'groesse' => $this->verzeichnisGroesse($pfad),
                 // Fertig gerundet aus dem Controller: In der Vorlage braeuchte
                 // es dafuer eine Rechnung im ViewHelper-Aufruf, und die ist in

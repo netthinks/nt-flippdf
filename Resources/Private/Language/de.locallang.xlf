@@ -51,6 +51,26 @@
                 <source>none</source>
                 <target>keins</target>
             </trans-unit>
+            <trans-unit id="list.viewer" resname="list.viewer">
+                <source>viewer old</source>
+                <target>Betrachter alt</target>
+            </trans-unit>
+            <trans-unit id="list.viewer.title" resname="list.viewer.title">
+                <source>This edition still carries the viewer of version %s. Refresh it to bring it up to date.</source>
+                <target>Diese Ausgabe trägt noch den Betrachter der Fassung %s. Ein Erneuern bringt sie auf den Stand.</target>
+            </trans-unit>
+            <trans-unit id="viewer.stale" resname="viewer.stale">
+                <source>%s edition(s) still carry the viewer of an earlier version. An edition holds its viewer as a copy, so an update of the extension does not reach it on its own. Refreshing rewrites viewer and settings without rendering the pages again.</source>
+                <target>%s Ausgabe(n) laufen noch mit dem Betrachter einer früheren Fassung. Eine Ausgabe trägt ihren Betrachter als Kopie in sich, ein Update der Extension erreicht sie also nicht von selbst. Das Erneuern schreibt Betrachter und Angaben neu, ohne die Seiten noch einmal zu rendern.</target>
+            </trans-unit>
+            <trans-unit id="action.refreshAll" resname="action.refreshAll">
+                <source>Refresh all viewers</source>
+                <target>Alle Betrachter erneuern</target>
+            </trans-unit>
+            <trans-unit id="msg.refreshAll.ok" resname="msg.refreshAll.ok">
+                <source>%s edition(s) refreshed.</source>
+                <target>%s Ausgabe(n) erneuert.</target>
+            </trans-unit>
             <trans-unit id="list.outdated" resname="list.outdated">
                 <source>outdated</source>
                 <target>veraltet</target>

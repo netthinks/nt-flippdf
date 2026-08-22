@@ -39,6 +39,21 @@
             <trans-unit id="list.toc.none" resname="list.toc.none">
                 <source>none</source>
             </trans-unit>
+            <trans-unit id="list.viewer" resname="list.viewer">
+                <source>viewer old</source>
+            </trans-unit>
+            <trans-unit id="list.viewer.title" resname="list.viewer.title">
+                <source>This edition still carries the viewer of version %s. Refresh it to bring it up to date.</source>
+            </trans-unit>
+            <trans-unit id="viewer.stale" resname="viewer.stale">
+                <source>%s edition(s) still carry the viewer of an earlier version. An edition holds its viewer as a copy, so an update of the extension does not reach it on its own. Refreshing rewrites viewer and settings without rendering the pages again.</source>
+            </trans-unit>
+            <trans-unit id="action.refreshAll" resname="action.refreshAll">
+                <source>Refresh all viewers</source>
+            </trans-unit>
+            <trans-unit id="msg.refreshAll.ok" resname="msg.refreshAll.ok">
+                <source>%s edition(s) refreshed.</source>
+            </trans-unit>
             <trans-unit id="list.outdated" resname="list.outdated">
                 <source>outdated</source>
             </trans-unit>

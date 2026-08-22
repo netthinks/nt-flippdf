@@ -96,6 +96,9 @@ class FlipbookBuilder
         ],
     ];
 
+    private ?string $version = null;
+    private ?string $hash = null;
+
     public function __construct(
         private readonly PdfToolkit $toolkit,
         private readonly TocBuilder $tocBuilder,
@@ -305,6 +308,10 @@ class FlipbookBuilder
             'source' => $pdfFile,
             'sourceTime' => (int)@filemtime($pdfFile),
             'built' => time(),
+            // Fassung des mitkopierten Betrachters: Daran sieht das Modul,
+            // welche Ausgabe nach einem Update noch zu erneuern ist.
+            'viewer' => $this->viewerVersion(),
+            'viewerHash' => $this->viewerHash(),
             'pages' => $pages,
         ];
         /* Alles, was der Betrachter kennt, steht in dieser Datei. Das
@@ -365,6 +372,61 @@ class FlipbookBuilder
      * wirken Aenderungen am Betrachter sonst erst beim vollstaendigen Neubau -
      * der wuerde alle Seiten neu rendern.
      */
+    /**
+     * Fassung dieses Pakets - sie steht in jeder gebauten Ausgabe.
+     *
+     * Aus der ext_emconf.php und nicht aus den Paketangaben: Wer die Extension
+     * ueber ein eigenes Repository zieht, bekaeme von dort nur 'dev-main' zu
+     * sehen, und der Vergleich liefe ins Leere.
+     */
+    public function viewerVersion(): string
+    {
+        if ($this->version !== null) {
+            return $this->version;
+        }
+        $this->version = '';
+        $datei = GeneralUtility::getFileAbsFileName('EXT:nt_flippdf/ext_emconf.php');
+        if (is_file($datei)) {
+            $lesen = static function (string $pfad): array {
+                $EM_CONF = [];
+                $_EXTKEY = 'nt_flippdf';
+                include $pfad;
+
+                return (array)($EM_CONF[$_EXTKEY] ?? []);
+            };
+            $this->version = (string)($lesen($datei)['version'] ?? '');
+        }
+
+        return $this->version;
+    }
+
+    /**
+     * Kurzzeichen ueber die Dateien, die in eine Ausgabe kopiert werden.
+     *
+     * Die Fassung allein genuegt nicht: Wer am Betrachter arbeitet oder ihn
+     * anpasst, aendert Dateien, ohne die Nummer hochzusetzen. Das Zeichen
+     * aendert sich dann trotzdem, und das Modul weist die Ausgaben aus.
+     */
+    public function viewerHash(): string
+    {
+        if ($this->hash !== null) {
+            return $this->hash;
+        }
+        $dateien = [
+            'EXT:nt_flippdf/Resources/Public/Viewer/viewer.js',
+            'EXT:nt_flippdf/Resources/Public/Viewer/viewer.css',
+            'EXT:nt_flippdf/Resources/Private/Templates/index.html',
+        ];
+        $roh = '';
+        foreach ($dateien as $datei) {
+            $pfad = GeneralUtility::getFileAbsFileName($datei);
+            $roh .= is_file($pfad) ? (string)md5_file($pfad) : '';
+        }
+        $this->hash = substr(md5($roh), 0, 8);
+
+        return $this->hash;
+    }
+
     public function refreshViewer(string $slug): bool
     {
         $target = rtrim($this->resolveBasePath(), '/') . '/' . $this->sanitizeSlug($slug);
@@ -388,6 +450,8 @@ class FlipbookBuilder
         // Neuer Stand: Er haengt an den Adressen der Betrachter-Dateien, sonst
         // liefe der Browser weiter mit der alten Fassung.
         $book['built'] = time();
+        $book['viewer'] = $this->viewerVersion();
+        $book['viewerHash'] = $this->viewerHash();
         /* Erst fragen, dann schreiben - wie beim Bauen. Sonst stuende in der
            Datei der Stand vor dem Ereignis, und was das Zusatzpaket beisteuert
            (etwa franzoesische und chinesische Beschriftungen) waere nach jedem

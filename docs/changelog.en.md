@@ -6,6 +6,24 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.de.md)**.
 
+## [1.10.0] – 2026-08-22
+
+### Added
+
+- **Editions say which viewer they carry.** An edition holds its viewer as a
+  copy — that is what keeps it running independently of TYPO3, but an update of
+  the extension does not reach it on its own. Every edition now records the
+  version it was written with, plus a short mark over the viewer files, so a
+  change without a raised number is caught too.
+- **The backend module marks what is behind** with a *viewer old* badge and
+  offers **Refresh all viewers** above the list. Refreshing rewrites viewer and
+  settings; no page is rendered again.
+- **`extension:setup` takes the editions along.** A deployment that sets the
+  extension up needs no further step. A plain `composer update` still does not
+  suffice — it only replaces the files below `vendor`.
+
+---
+
 ## [1.9.7] – 2026-08-22
 
 ### Changed

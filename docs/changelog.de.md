@@ -6,6 +6,24 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](https://github.com/netthinks/nt-flippdf/blob/main/CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.10.0] – 2026-08-22
+
+### Neu
+
+- **Ausgaben sagen, welchen Betrachter sie tragen.** Eine Ausgabe trägt ihren
+  Betrachter als Kopie in sich — genau das hält sie unabhängig von TYPO3, aber
+  ein Update der Extension erreicht sie nicht von selbst. Jede Ausgabe hält jetzt
+  die Fassung fest, mit der sie geschrieben wurde, dazu ein Kurzzeichen über die
+  Betrachterdateien: So fällt auch eine Änderung ohne erhöhte Nummer auf.
+- **Das Backend-Modul weist aus, was hinterherhinkt** — Marke *Betrachter alt* an
+  der Ausgabe und über der Liste der Knopf **Alle Betrachter erneuern**. Das
+  Erneuern schreibt Betrachter und Angaben neu, gerendert wird keine Seite.
+- **`extension:setup` nimmt die Ausgaben mit.** Ein Deploy, der die Extension
+  einrichtet, braucht keinen weiteren Schritt. Ein reines `composer update`
+  genügt weiterhin nicht — es tauscht nur die Dateien im Verzeichnis `vendor`.
+
+---
+
 ## [1.9.7] – 2026-08-22
 
 ### Geändert

@@ -37,3 +37,17 @@ services:
         description: 'Erneuert den Betrachter vorhandener Ausgaben.'
         schedulable: false
 
+
+  # Nach einem Update die vorhandenen Ausgaben nachziehen. Zwei Ereignisse,
+  # weil TYPO3 12.4 das erste noch nicht kennt; getroffen wird in beiden
+  # Faellen nur diese Extension.
+  Netthinks\NtFlippdf\EventListener\SetupListener:
+    tags:
+      - name: event.listener
+        identifier: 'nt-flippdf/setup'
+        event: TYPO3\CMS\Core\Package\Event\PackageInitializationEvent
+        method: 'beimEinrichten'
+      - name: event.listener
+        identifier: 'nt-flippdf/activation'
+        event: TYPO3\CMS\Core\Package\Event\AfterPackageActivationEvent
+        method: 'beimAktivieren'

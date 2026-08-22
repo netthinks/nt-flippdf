@@ -63,6 +63,17 @@ vendor/bin/typo3 flippdf:refresh             # alle Ausgaben
 vendor/bin/typo3 flippdf:refresh <kennung>   # nur diese
 ```
 
+**Daran denken muss man selten.** Jede Ausgabe trägt die Fassung ihres
+Betrachters bei sich. Weicht sie von der eingerichteten ab — oder haben sich die
+Betrachterdateien geändert, ohne dass die Nummer hochgesetzt wurde —, weist das
+Backend-Modul die Ausgabe als **Betrachter alt** aus und bietet oben *Alle
+Betrachter erneuern* an.
+
+**Ganz von selbst** geschieht es beim Einrichten der Extension: `extension:setup`
+zieht die vorhandenen Ausgaben mit nach — bei einem Deploy, der diesen Befehl
+ohnehin fährt, ist damit nichts mehr zu tun. Ein reines `composer update` reicht
+dafür nicht: Es tauscht nur die Dateien im Verzeichnis `vendor`.
+
 ## Eine Ausgabe bearbeiten
 
 ![Eine Ausgabe bearbeiten](images/modul-bearbeiten.webp)

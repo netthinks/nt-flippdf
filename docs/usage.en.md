@@ -60,6 +60,16 @@ vendor/bin/typo3 flippdf:refresh          # all editions
 vendor/bin/typo3 flippdf:refresh <slug>   # only this one
 ```
 
+**Rarely something to remember.** Every edition carries the version of its
+viewer. Where it differs from the installed one — or where the viewer files have
+changed without the number being raised — the backend module marks the edition
+as **viewer old** and offers *Refresh all viewers* at the top.
+
+**It also happens on its own** when the extension is set up: `extension:setup`
+takes the existing editions along, so a deployment running that command anyway
+leaves nothing to do. A plain `composer update` does not suffice: it only
+replaces the files below `vendor`.
+
 ## Editing an edition
 
 ![Editing an edition](images/modul-bearbeiten.webp)
