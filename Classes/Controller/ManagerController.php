@@ -64,7 +64,7 @@ class ManagerController
         return match ($aktion) {
             'bauen' => $this->bauen($parsed),
             'erneuern' => $this->erneuern((string)($query['kennung'] ?? '')),
-            'alleErneuern' => $this->alleErneuern(),
+            'alleErneuern' => $this->alleErneuern(($query['einstellungen'] ?? '') === '1'),
             'neubauen' => $this->neubauen((string)($query['kennung'] ?? '')),
             'loeschen' => $this->loeschen((string)($query['kennung'] ?? '')),
             'bearbeiten' => $this->bearbeiten($request, (string)($query['kennung'] ?? '')),
@@ -169,17 +169,21 @@ class ManagerController
      *
      * Der Weg nach einem Update der Extension: Die Seitenbilder bleiben, nur
      * Betrachter und Angaben werden neu geschrieben - das dauert Sekunden.
+     *
+     * Mit $einstellungenUebernehmen zieht es zugleich die Einstellungen der
+     * Erweiterung nach. Das ist der Weg nach einer Aenderung dort: sonst
+     * behaelt jede Ausgabe, was sie beim Bauen mitbekommen hat.
      */
-    private function alleErneuern(): ResponseInterface
+    private function alleErneuern(bool $einstellungenUebernehmen = false): ResponseInterface
     {
         $erneuert = 0;
         foreach ($this->builder->listIssues() as $kennung) {
-            if ($this->builder->refreshViewer($kennung)) {
+            if ($this->builder->refreshViewer($kennung, $einstellungenUebernehmen)) {
                 $erneuert++;
             }
         }
         $this->melden(
-            $this->text('msg.refreshAll.ok', [$erneuert]),
+            $this->text($einstellungenUebernehmen ? 'msg.refreshAllSettings.ok' : 'msg.refreshAll.ok', [$erneuert]),
             $erneuert > 0 ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::INFO
         );
 

@@ -427,7 +427,12 @@ class FlipbookBuilder
         return $this->hash;
     }
 
-    public function refreshViewer(string $slug): bool
+    /**
+     * @param bool $einstellungenUebernehmen Die Ausgabe folgt wieder den
+     *   Extension-Einstellungen, auch wo sie bisher abwich. Ohne dies bleibt
+     *   erhalten, was am Bestand einmal gesetzt wurde.
+     */
+    public function refreshViewer(string $slug, bool $einstellungenUebernehmen = false): bool
     {
         $target = rtrim($this->resolveBasePath(), '/') . '/' . $this->sanitizeSlug($slug);
         $bookFile = $target . '/book.json';
@@ -443,10 +448,22 @@ class FlipbookBuilder
         $book['language'] = $language;
         $book['labels'] = self::LABELS[$language] ?? self::LABELS['en'];
         $book['toc'] = $this->normalizeToc((array)($book['toc'] ?? []), (int)($book['pageCount'] ?? 0));
-        // Aeltere Ausgaben kennen die Bedienliste noch nicht; die Vorgaben aus
-        // der Extension-Konfiguration greifen dann beim Erneuern.
-        $book['ui'] = $this->ui((array)($book['ui'] ?? []));
+        /* Aeltere Ausgaben kennen die Bedienliste noch nicht; die Vorgaben aus
+           der Extension-Konfiguration greifen dann beim Erneuern. Was eine
+           Ausgabe hingegen schon traegt, bleibt ihr - sonst naehme dieser
+           Befehl (er laeuft auch nach jedem extension:setup) einer im Modul
+           eingerichteten Ausgabe ihre Einstellungen wieder fort.
+           Wer die Extension-Einstellungen ausdruecklich nachziehen will, sagt
+           es: dann zaehlt allein, was dort steht. */
+        $bedienung = $einstellungenUebernehmen ? [] : (array)($book['ui'] ?? []);
+        $book['ui'] = $this->ui($bedienung);
         $book['theme'] = $this->theme((array)($book['theme'] ?? []));
+        if ($einstellungenUebernehmen) {
+            // Blaettern und Vergroessern stehen ebenso in den Einstellungen.
+            $book['flip'] = $this->flip([]);
+            $book['zoom'] = ($this->configuration()['zoom'] ?? '1') !== '0';
+            $book['zoomMax'] = max(1.5, (float)($this->configuration()['zoomMax'] ?? 3));
+        }
         // Neuer Stand: Er haengt an den Adressen der Betrachter-Dateien, sonst
         // liefe der Browser weiter mit der alten Fassung.
         $book['built'] = time();

@@ -54,6 +54,15 @@
             <trans-unit id="msg.refreshAll.ok" resname="msg.refreshAll.ok">
                 <source>%s edition(s) refreshed.</source>
             </trans-unit>
+            <trans-unit id="action.refreshAllSettings" resname="action.refreshAllSettings">
+                <source>Apply the current settings to all editions</source>
+            </trans-unit>
+            <trans-unit id="action.refreshAllSettings.title" resname="action.refreshAllSettings.title">
+                <source>An edition keeps the settings it was built with. This hands every edition the current extension settings: buttons, controls, page flip and zoom. Colours, title and table of contents of an edition stay untouched.</source>
+            </trans-unit>
+            <trans-unit id="msg.refreshAllSettings.ok" resname="msg.refreshAllSettings.ok">
+                <source>%s edition(s) refreshed, the settings are now applied.</source>
+            </trans-unit>
             <trans-unit id="list.outdated" resname="list.outdated">
                 <source>outdated</source>
             </trans-unit>

@@ -75,6 +75,14 @@ every page:
 vendor/bin/typo3 flippdf:refresh [slug]
 ```
 
+An edition keeps the settings it was built with, so refreshing leaves them
+alone. To hand the current extension settings — buttons, controls, page flip
+and zoom — to the editions that already exist, say so:
+
+```bash
+vendor/bin/typo3 flippdf:refresh [slug] --einstellungen
+```
+
 ## What the viewer offers
 
 Page flipping (arrow keys, buttons, dragging a corner, swiping), page slider
@@ -232,6 +240,15 @@ dass alle Seiten neu gerendert werden:
 
 ```bash
 vendor/bin/typo3 flippdf:refresh [kennung]
+```
+
+Eine Ausgabe behält die Einstellungen, mit denen sie gebaut wurde; das Erneuern
+lässt sie also in Ruhe. Wer die heutigen Einstellungen der Erweiterung —
+Schaltflächen, Bedienung, Blättern und Vergrößern — an die vorhandenen Ausgaben
+übergeben will, sagt es:
+
+```bash
+vendor/bin/typo3 flippdf:refresh [kennung] --einstellungen
 ```
 
 ## Was der Betrachter anbietet

@@ -61,6 +61,11 @@ every page:
 vendor/bin/typo3 flippdf:refresh [slug]
 ```
 
+An edition keeps the settings it was built with. To hand the current extension
+settings — buttons, controls, page flip and zoom — to the editions that already
+exist, add `--einstellungen` (`-e`); in the backend module the same sits above
+the list as **Apply the current settings to all editions**.
+
 ![Editing an edition in the backend module](Images/modul-bearbeiten.webp)
 
 ## Putting an edition on a page

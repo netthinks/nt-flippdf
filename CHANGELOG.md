@@ -4,6 +4,20 @@ Version numbers follow [Semantic Versioning](https://semver.org/).
 The German translation of every entry follows in
 **[CHANGELOG.de.md](CHANGELOG.de.md)**.
 
+## [1.11.0] – 2026-08-31
+
+### Added
+
+- **Settings can now reach the editions that already exist.** An edition keeps
+  what it was built with — that is deliberate, since `flippdf:refresh` also runs
+  after every `extension:setup` and must not take an edition its settings away.
+  But it also meant a changed setting never arrived anywhere: the button style
+  stayed as it was, however often one refreshed. Say it explicitly and it
+  arrives: `flippdf:refresh --einstellungen` (`-e`), or in the backend module
+  the button **Apply the current settings to all editions**. It hands over
+  buttons, controls, page flip and zoom; colours, title and table of contents of
+  an edition stay untouched.
+
 ## [1.10.0] – 2026-08-22
 
 ### Added

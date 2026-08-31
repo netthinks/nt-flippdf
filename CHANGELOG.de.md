@@ -4,6 +4,21 @@ Die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 Führende Fassung ist die englische in **[CHANGELOG.md](CHANGELOG.md)**; hier
 steht die deutsche Übersetzung.
 
+## [1.11.0] – 2026-08-31
+
+### Neu
+
+- **Einstellungen erreichen jetzt auch die Ausgaben, die es schon gibt.** Eine
+  Ausgabe behält, womit sie gebaut wurde — mit Absicht, denn `flippdf:refresh`
+  läuft auch nach jedem `extension:setup` und darf einer Ausgabe ihre
+  Einstellungen nicht wieder fortnehmen. Nur kam eine geänderte Einstellung
+  damit nirgends an: Der Knopfstil blieb, wie er war, sooft man auch erneuerte.
+  Wer es ausdrücklich sagt, bei dem kommt sie an: `flippdf:refresh
+  --einstellungen` (`-e`), im Backend-Modul der Knopf **Einstellungen auf alle
+  Ausgaben übertragen**. Übergeben werden Schaltflächen, Bedienung, Blättern
+  und Vergrößern; Farben, Titel und Inhaltsverzeichnis einer Ausgabe bleiben
+  unberührt.
+
 ## [1.10.0] – 2026-08-22
 
 ### Neu

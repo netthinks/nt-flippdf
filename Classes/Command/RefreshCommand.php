@@ -7,6 +7,7 @@ namespace Netthinks\NtFlippdf\Command;
 use Netthinks\NtFlippdf\Service\FlipbookBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -29,13 +30,21 @@ class RefreshCommand extends Command
     {
         $this
             ->setDescription('Erneuert den Betrachter vorhandener Ausgaben.')
-            ->addArgument('kennung', InputArgument::OPTIONAL, 'Nur diese Ausgabe erneuern. Ohne Angabe werden alle erneuert.', '');
+            ->addArgument('kennung', InputArgument::OPTIONAL, 'Nur diese Ausgabe erneuern. Ohne Angabe werden alle erneuert.', '')
+            ->addOption(
+                'einstellungen',
+                'e',
+                InputOption::VALUE_NONE,
+                'Die Einstellungen der Erweiterung nachziehen (Schaltflaechen, Bedienung, Blaettern, Vergroessern). '
+                    . 'Ohne dies behaelt jede Ausgabe, was sie traegt.'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $kennung = (string)$input->getArgument('kennung');
+        $einstellungen = (bool)$input->getOption('einstellungen');
         $ausgaben = $kennung !== '' ? [$kennung] : $this->builder->listIssues();
 
         if ($ausgaben === []) {
@@ -46,14 +55,17 @@ class RefreshCommand extends Command
 
         $erneuert = 0;
         foreach ($ausgaben as $ausgabe) {
-            if ($this->builder->refreshViewer($ausgabe)) {
+            if ($this->builder->refreshViewer($ausgabe, $einstellungen)) {
                 $io->writeln('erneuert: ' . $ausgabe);
                 $erneuert++;
             } else {
                 $io->writeln('<comment>übersprungen (keine book.json): ' . $ausgabe . '</comment>');
             }
         }
-        $io->success($erneuert . ' von ' . count($ausgaben) . ' Ausgabe(n) erneuert.');
+        $io->success(
+            $erneuert . ' von ' . count($ausgaben) . ' Ausgabe(n) erneuert'
+            . ($einstellungen ? ', die Einstellungen sind nachgezogen.' : '.')
+        );
 
         return Command::SUCCESS;
     }

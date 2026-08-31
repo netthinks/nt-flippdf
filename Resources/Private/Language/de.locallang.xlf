@@ -71,6 +71,18 @@
                 <source>%s edition(s) refreshed.</source>
                 <target>%s Ausgabe(n) erneuert.</target>
             </trans-unit>
+            <trans-unit id="action.refreshAllSettings" resname="action.refreshAllSettings">
+                <source>Apply the current settings to all editions</source>
+                <target>Einstellungen auf alle Ausgaben übertragen</target>
+            </trans-unit>
+            <trans-unit id="action.refreshAllSettings.title" resname="action.refreshAllSettings.title">
+                <source>An edition keeps the settings it was built with. This hands every edition the current extension settings: buttons, controls, page flip and zoom. Colours, title and table of contents of an edition stay untouched.</source>
+                <target>Eine Ausgabe behält die Einstellungen, mit denen sie gebaut wurde. Dies gibt jeder Ausgabe die heutigen Einstellungen der Erweiterung mit: Schaltflächen, Bedienung, Blättern und Vergrößern. Farben, Titel und Inhaltsverzeichnis einer Ausgabe bleiben unberührt.</target>
+            </trans-unit>
+            <trans-unit id="msg.refreshAllSettings.ok" resname="msg.refreshAllSettings.ok">
+                <source>%s edition(s) refreshed, the settings are now applied.</source>
+                <target>%s Ausgabe(n) erneuert, die Einstellungen sind übertragen.</target>
+            </trans-unit>
             <trans-unit id="list.outdated" resname="list.outdated">
                 <source>outdated</source>
                 <target>veraltet</target>
