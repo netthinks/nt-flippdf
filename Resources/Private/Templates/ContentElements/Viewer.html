@@ -23,7 +23,9 @@ stehen.</f:comment>
 das ist, weiß nur das Projekt - deshalb als Konstante.</f:comment>
 <div class="{settings.innenKlasse}">
 
-    <f:if condition="{data.header}">
+    <f:comment>Erscheinungsbild „Verborgen“ (header_layout 100) gilt auch, wenn das
+    Projekt kein Header-Partial mitbringt und die Ersatz-Überschrift greift.</f:comment>
+    <f:if condition="{data.header} && {data.header_layout} != 100">
         <f:render partial="Header/All" arguments="{_all}" optional="true">
             <h2 class="ntflippdf-header">{data.header}</h2>
         </f:render>
